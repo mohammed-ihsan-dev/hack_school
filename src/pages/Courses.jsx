@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Search, Filter } from 'lucide-react';
 import { COURSES } from '../utils/mockData';
 import CourseCard from '../components/CourseCard';
-import { Search, Compass } from 'lucide-react';
+import Button from '../components/Button';
 
 const Courses = () => {
   return (
@@ -10,64 +11,61 @@ const Courses = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen pb-40"
+      className="bg-[#FDF4FF] min-h-screen pb-32"
     >
-      {/* Editorial Header */}
-      <section className="bg-white pt-48 pb-32 text-center relative overflow-hidden border-b border-slate-50">
-        <div className="absolute top-0 left-0 w-full h-full bg-slate-50/50" />
-        <div className="container mx-auto px-6 relative z-10 space-y-10">
-          <div className="inline-flex items-center gap-4 mx-auto">
-             <div className="w-10 h-px bg-accent" />
-             <span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em]">Collections</span>
-             <div className="w-10 h-px bg-accent" />
+      {/* Header */}
+      <section className="pt-40 pb-20 px-6 bg-gradient-to-br from-primary to-[#A78BFA] text-white">
+        <div className="container mx-auto text-center space-y-6">
+          <h1 className="text-4xl lg:text-6xl font-black tracking-tight">Our Knowledge Hub</h1>
+          <p className="text-white/80 max-w-2xl mx-auto text-lg font-medium">Explore 80+ world-class courses designed to accelerate your career and personal growth.</p>
+          
+          <div className="max-w-2xl mx-auto relative pt-8 group">
+            <Search className="absolute left-10 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors" />
+            <input 
+              type="text" 
+              placeholder="Search for your next skill..."
+              className="w-full pl-20 pr-40 py-6 bg-white text-gray-900 border-none rounded-full focus:ring-4 focus:ring-primary/20 outline-none transition-all shadow-xl"
+            />
+            <Button variant="primary" className="absolute right-3 top-3 bottom-3 px-10 shadow-none">Find Course</Button>
           </div>
-          <h1 className="text-5xl lg:text-8xl font-bold text-primary tracking-tight">
-            Our <span className="italic font-light">Archive.</span>
-          </h1>
-          <p className="text-slate-400 text-lg lg:text-xl max-w-2xl mx-auto italic font-medium">
-            Explore a curated selection of intensive cohorts designed for the modern digital strategist.
-          </p>
         </div>
       </section>
 
-      {/* Boutique Filter Bar */}
-      <div className="container mx-auto px-6 lg:px-12 -mt-10 relative z-20">
-        <div className="bg-white p-6 shadow-2xl border border-slate-50 flex flex-col md:flex-row gap-8 items-center justify-between">
-          <div className="relative w-full md:w-[500px]">
-             <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-300" size={18} />
-             <input 
-               type="text" 
-               placeholder="Search the archives..."
-               className="w-full pl-16 pr-6 py-4 bg-slate-50 border border-transparent focus:border-accent/40 outline-none transition-all font-bold uppercase tracking-widest text-[10px]"
-             />
-          </div>
-          <div className="flex gap-8 items-center">
-             {['All', 'Marketing', 'SEO', 'Branding'].map((tag) => (
-               <button 
-                 key={tag}
-                 className={`text-[10px] font-black uppercase tracking-[0.3em] transition-all relative py-1 ${tag === 'All' ? 'text-accent border-b border-accent' : 'text-slate-300 hover:text-primary'}`}
-               >
-                 {tag}
-               </button>
-             ))}
-          </div>
-        </div>
-      </div>
-
       {/* Grid */}
-      <section className="container mx-auto px-6 lg:px-12 mt-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-          {COURSES.map((course, i) => (
-            <motion.div
-              key={course.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <CourseCard course={course} />
-            </motion.div>
-          ))}
+      <section className="container mx-auto px-6 py-20">
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* Sidebar (Optional UI) */}
+          <div className="lg:w-1/4 space-y-8 hidden lg:block">
+            <div className="bg-white p-8 rounded-[2.5rem] shadow-sm space-y-8">
+              <h4 className="text-lg font-black text-gray-900">Categories</h4>
+              <div className="space-y-4">
+                {['All Courses', 'Marketing', 'SEO', 'Branding', 'Analytics'].map((tag) => (
+                  <label key={tag} className="flex items-center gap-3 cursor-pointer group">
+                    <input type="checkbox" className="w-5 h-5 accent-primary rounded-lg" defaultChecked={tag === 'All Courses'} />
+                    <span className="text-sm font-bold text-gray-600 group-hover:text-primary transition-colors">{tag}</span>
+                  </label>
+                ))}
+              </div>
+              <div className="pt-4">
+                 <Button variant="outline" className="w-full text-xs py-3">Clear Filters</Button>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:w-3/4 space-y-12">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">Showing {COURSES.length} Courses</p>
+              <button className="flex items-center gap-2 text-primary font-black lg:hidden">
+                <Filter size={18} /> Filters
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {COURSES.map((course) => (
+                <CourseCard key={course.id} course={course} />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </motion.div>

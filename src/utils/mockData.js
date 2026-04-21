@@ -129,3 +129,25 @@ export const STATS = [
   { label: 'Rating', value: '4.9' },
 ];
 
+export const TEAM = [
+  {
+    name: "Ihsan Mohammed",
+    role: "Founder & Chief Strategist",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ihsan",
+    bio: "Visionary leader with 10+ years in institutional growth and digital transformation."
+  },
+  {
+    name: "Sarah Jenkins",
+    role: "Academic Director",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+    bio: "Ex-Canva SEO lead, specializing in large-scale organic growth frameworks."
+  },
+  {
+    name: "Deepak Vishnode",
+    role: "Operating Partner",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+    bio: "Performance architecture expert with over $50M in managed institutional spend."
+  }
+];
+
+

@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Star, ArrowRight, Quote, ShieldCheck, Globe, Trophy } from 'lucide-react';
+import { Search, Play, CheckCircle, Star, Quote, ArrowRight } from 'lucide-react';
 import Button from '../components/Button';
 import CourseCard from '../components/CourseCard';
-import { COURSES, TESTIMONIALS, STATS } from '../utils/mockData';
+import { COURSES, TESTIMONIALS } from '../utils/mockData';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -12,158 +12,209 @@ const Home = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="space-y-40 pb-40"
+      className="overflow-x-hidden"
     >
-      {/* Hero Section - Classic High Contrast */}
-      <section className="relative min-h-screen flex items-center pt-20">
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-100/50" />
-          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-[100px]" />
-        </div>
-        
-        <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="space-y-10"
-          >
-            <div className="inline-flex items-center gap-3">
-              <div className="w-10 h-px bg-accent" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-accent">Established MMXXIV</span>
-            </div>
-            
-            <h1 className="text-6xl lg:text-8xl font-bold leading-tight text-primary drop-shadow-sm">
-              The Art of <br />
-              <span className="italic font-light">Digital Mastery.</span>
+      {/* 1. Hero Section */}
+      <section className="pt-32 pb-20 px-6">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8">
+            <h1 className="text-5xl lg:text-7xl font-black leading-tight text-gray-900">
+              Develop your <br />
+              <span className="text-primary italic">skills</span> in a new <br />
+              and unique way
             </h1>
-            
-            <p className="text-slate-500 text-lg lg:text-xl leading-relaxed max-w-lg font-medium italic">
-              Cultivating the next generation of marketing visionaries through high-budget execution and exclusive mentorship.
+            <p className="text-gray-500 text-lg lg:text-xl font-medium max-w-lg leading-relaxed">
+              Join a world-leading platform for business development and career testing. We believe in providing unique learning experiences.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-8 pt-6">
-              <Link to="/courses">
-                <Button variant="primary" className="px-12 py-4">Explore Collections</Button>
-              </Link>
-              <Link to="/about">
-                <Button variant="ghost" className="text-primary hover:text-accent font-black tracking-[0.3em]">Our Philosophy</Button>
-              </Link>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 2, ease: "easeOut" }}
-            className="relative lg:h-[700px] overflow-hidden shadow-2xl"
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop" 
-              className="w-full h-full object-cover grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition-all duration-1000"
-              alt="Executive"
-            />
-            <div className="absolute bottom-12 right-12 text-white text-right space-y-2">
-              <div className="text-5xl font-bold italic tracking-tighter">Legacy</div>
-              <div className="text-[10px] font-bold uppercase tracking-[0.3em] opacity-80 underline underline-offset-8">Scroll to unfold</div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Stats Bar - Refined Ivory */}
-      <section className="bg-white py-24 border-y border-slate-50">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-0">
-            {STATS.map((stat, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                className="text-center px-10 border-x border-slate-50 first:border-0 last:border-0"
-              >
-                <div className="text-5xl font-bold text-primary mb-3">
-                  {stat.value}
+            <div className="flex items-center gap-8">
+              <Button variant="primary" className="px-10 py-4 text-lg">Enroll Now</Button>
+              <button className="flex items-center gap-3 font-bold group">
+                <div className="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shadow-lg shadow-primary/20">
+                  <Play size={20} fill="currentColor" />
                 </div>
-                <div className="text-[10px] font-bold text-accent uppercase tracking-[0.3em]">{stat.label}</div>
-              </motion.div>
-            ))}
+                What's Etech?
+              </button>
+            </div>
+            
+            <div className="flex items-center gap-12 pt-8">
+              <div>
+                <div className="text-2xl font-black text-gray-900 font-sans">80+</div>
+                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Online Courses</div>
+              </div>
+              <div className="h-10 w-px bg-gray-200" />
+              <div>
+                <div className="text-2xl font-black text-gray-900 font-sans">10M+</div>
+                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Online Students</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="w-full aspect-square rounded-[3rem] overflow-hidden shadow-2xl relative z-10">
+              <img 
+                src="https://images.unsplash.com/photo-1523240715630-992bb373950d?q=80&w=2070&auto=format&fit=crop" 
+                className="w-full h-full object-cover"
+                alt="Student"
+              />
+            </div>
+            {/* Decors */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary rounded-full blur-3xl opacity-20 floating" />
+            <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-primary rounded-full blur-3xl opacity-20 floating animate-delay-1000" />
+            
+            {/* Floating Card Mock */}
+            <div className="absolute top-10 -left-10 bg-white p-4 rounded-2xl shadow-xl z-20 hidden md:block floating">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                   <CheckCircle size={20} />
+                </div>
+                <div>
+                   <div className="text-xs font-black">2.4k+ Students</div>
+                   <div className="text-[10px] text-gray-400">Enrolled this month</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Courses - Minimal Grid */}
-      <section className="container mx-auto px-6 lg:px-12">
-        <div className="flex flex-col items-center text-center space-y-6 mb-24">
-          <span className="text-[10px] font-black uppercase tracking-[0.5em] text-accent">Active Cohorts</span>
-          <h2 className="text-4xl lg:text-6xl font-bold text-primary">Curated Masterclasses</h2>
-          <div className="w-20 h-px bg-accent mx-auto mt-4" />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-          {COURSES.map((course) => (
-            <CourseCard key={course.id} course={course} />
+      {/* 2. Partners bar */}
+      <section className="bg-primary py-8 overflow-hidden">
+        <div className="container mx-auto px-6 whitespace-nowrap overflow-x-auto scrollbar-hide flex items-center justify-between gap-12 lg:gap-0 opacity-80">
+          {['duolingo', 'magic leap', 'Microsoft', 'Codecov', 'UserTesting'].map((partner) => (
+            <span key={partner} className="text-white text-xl lg:text-3xl font-black uppercase italic tracking-tighter mix-blend-overlay">
+              {partner}
+            </span>
           ))}
         </div>
       </section>
 
-      {/* Why Section - Classic Iconography */}
-      <section className="bg-primary/5 py-40">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div className="space-y-12">
-              <div className="space-y-6">
-                <span className="text-[10px] font-black uppercase tracking-[0.5em] text-accent">Institutional Excellence</span>
-                <h2 className="text-4xl lg:text-5xl font-bold text-primary leading-tight">The Foundation of Success.</h2>
-                <p className="text-slate-500 text-lg leading-relaxed italic">At HackSchool, we treat digital marketing as a high-stake craft, blending classical discipline with modern execution.</p>
+      {/* 3. Search Section */}
+      <section className="py-24 px-6 bg-white">
+        <div className="container mx-auto text-center space-y-12">
+          <h2 className="text-4xl lg:text-5xl font-black">Search Courses</h2>
+          <div className="max-w-2xl mx-auto relative group">
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors" />
+            <input 
+              type="text" 
+              placeholder="Search for over 50+ courses"
+              className="w-full pl-16 pr-40 py-6 bg-white border-2 border-gray-100 rounded-full focus:border-primary outline-none transition-all shadow-sm"
+            />
+            <Button variant="primary" className="absolute right-2 top-2 bottom-2 px-10">Search</Button>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Benefits Section */}
+      <section className="py-24 px-6">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="grid grid-cols-2 gap-6 scale-90 lg:scale-100">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className={`aspect-square rounded-[3rem] overflow-hidden shadow-2xl ${i % 2 === 0 ? 'mt-12' : ''}`}>
+                <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 10}`} className="w-full h-full bg-slate-100" alt="Student" />
               </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {[
-                  { icon: ShieldCheck, title: "Trust & Ethics", desc: "Rigorous standards for data and strategy." },
-                  { icon: Globe, title: "Global Network", desc: "Access to venture-backed startups worldwide." },
-                  { icon: Trophy, title: "Elite Placement", desc: "Guaranteed 1-month residency with partners." },
-                  { icon: Star, title: "Master Mentors", desc: "Direct guidance from established operators." }
-                ].map((f, i) => (
-                  <div key={i} className="space-y-4">
-                    <div className="text-accent">
-                      <f.icon size={32} strokeWidth={1} />
-                    </div>
-                    <h3 className="text-lg font-bold text-primary uppercase tracking-widest">{f.title}</h3>
-                    <p className="text-slate-500 text-xs leading-relaxed font-bold uppercase tracking-widest opacity-60">{f.desc}</p>
+            ))}
+          </div>
+          
+          <div className="space-y-10">
+            <h2 className="text-4xl lg:text-5xl font-black leading-tight">
+              <span className="text-secondary font-serif italic">Benefits</span> From Our Online <br /> Learning
+            </h2>
+            <div className="space-y-8">
+              {[
+                { title: 'Online Degree', desc: 'Earn accredited degrees from top global universities fully online.', icon: '🎓' },
+                { title: 'Short Courses', desc: 'Master high-demand skills in weeks with targeted micro-credentials.', icon: '⏱️' },
+                { title: 'Training From Experts', desc: 'Learn directly from industry leaders at Fortune 500 companies.', icon: '🏆' },
+                { title: '1.5k+ Video Courses', desc: 'Access an ever-growing library of high-quality HD video modules.', icon: '🎥' }
+              ].map((benefit, i) => (
+                <div key={i} className="flex gap-6 group hover:translate-x-2 transition-transform">
+                  <div className="w-14 h-14 shrink-0 rounded-2xl bg-white shadow-xl flex items-center justify-center text-2xl group-hover:bg-primary group-hover:text-white transition-all">
+                    {benefit.icon}
                   </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative aspect-[3/4] overflow-hidden">
-               <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" className="w-full h-full object-cover brightness-75 transition-all duration-1000 grayscale origin-top scale-110 hover:scale-100" alt="Office" />
-               <div className="absolute inset-0 border-[20px] border-white/10 m-8" />
+                  <div className="space-y-1">
+                    <h4 className="text-xl font-bold text-gray-900">{benefit.title}</h4>
+                    <p className="text-sm text-gray-500 font-medium leading-relaxed">{benefit.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials - Elegant Quote Section */}
-      <section className="container mx-auto px-6 lg:px-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+      {/* 5. Popular Courses (Purple Gradient Section) */}
+      <section className="py-24 px-6 bg-gradient-to-br from-primary to-[#A78BFA] relative overflow-hidden">
+        <div className="container mx-auto relative z-10">
+          <div className="text-center text-white space-y-4 mb-20">
+            <h2 className="text-4xl lg:text-5xl font-black">Our Popular Courses</h2>
+            <p className="text-white/80 max-w-xl mx-auto font-medium">World-class courses designed to give you a head start in your career and practical skills for the real world.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {COURSES.map((course) => (
+              <CourseCard key={course.id} course={course} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Instructor Section */}
+      <section className="py-24 px-6">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="space-y-10">
+            <h2 className="text-4xl lg:text-5xl font-black leading-tight">
+              If You Are A Certified Teacher <br /> Then <span className="text-primary italic">Become An Instructor</span>
+            </h2>
+            <p className="text-gray-500 text-lg font-medium">Share your knowledge and inspire the world. We provide everything you need to reach millions of students globally.</p>
+            
+            <div className="space-y-4">
+              <h4 className="text-xl font-black">Enjoy Many Perks</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 text-sm font-bold text-gray-600">
+                {['Global Reach', 'Flexible Schedule', 'Passive Income', 'Certified Status', 'Direct Support', 'Analytics Dashboard'].map((perk) => (
+                   <div key={perk} className="flex items-center gap-2">
+                     <div className="w-2 h-2 rounded-full bg-primary" />
+                     {perk}
+                   </div>
+                ))}
+              </div>
+            </div>
+
+            <Button variant="primary" className="px-10 py-4">Become an Instructor</Button>
+          </div>
+
+          <div className="relative flex justify-center">
+             <div className="w-full aspect-square max-w-md rounded-full bg-primary/20 blur-3xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+             <div className="w-full aspect-[4/5] max-w-md rounded-[3rem] overflow-hidden shadow-2xl relative z-10 border-8 border-white">
+                <img src="https://images.unsplash.com/photo-1544717297-fa154da09f9b?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover" alt="Teacher" />
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Testimonials */}
+      <section className="py-24 px-6 bg-gradient-to-br from-[#A78BFA] to-primary overflow-hidden relative">
+        <div className="container mx-auto relative z-10">
+          <div className="text-center text-white space-y-4 mb-20">
+            <h2 className="text-4xl lg:text-5xl font-black">Student's Testimonials</h2>
+            <p className="text-white/80 max-w-2xl mx-auto font-medium">Over 10 million students have changed their lives through Etech. Hear what they have to say about us.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {TESTIMONIALS.map((t, i) => (
-              <motion.div
+              <motion.div 
                 key={i}
-                className="text-center space-y-10"
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-[2.5rem] text-white flex flex-col items-center text-center space-y-6"
               >
-                <div className="text-accent flex justify-center">
-                  <Quote size={40} className="opacity-20" />
+                <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white/20 shadow-xl">
+                  <img src={t.avatar} className="w-full h-full object-cover" alt={t.name} />
                 </div>
-                <p className="text-xl font-medium text-slate-700 italic leading-relaxed">"{t.quote}"</p>
-                <div className="flex flex-col items-center gap-4">
-                   <div className="w-16 h-16 rounded-none rotate-45 overflow-hidden border border-accent/20">
-                     <img src={t.avatar} className="-rotate-45 scale-150 grayscale" alt={t.name} />
-                   </div>
-                   <div className="pt-4">
-                     <h4 className="text-sm font-bold text-primary uppercase tracking-[0.2em]">{t.name}</h4>
-                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{t.role}</p>
-                   </div>
+                <div className="flex text-yellow-400 gap-1">
+                   {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                </div>
+                <p className="italic font-medium leading-relaxed opacity-90">"{t.quote}"</p>
+                <div>
+                   <h4 className="text-lg font-black">{t.name}</h4>
+                   <p className="text-xs font-bold uppercase tracking-widest opacity-60">{t.role}</p>
                 </div>
               </motion.div>
             ))}
@@ -171,20 +222,16 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section - Dark Institutional Banner */}
-      <section className="container mx-auto px-6 lg:px-12">
-        <div className="bg-primary text-white p-20 lg:p-32 relative overflow-hidden text-center space-y-12">
-           <div className="absolute top-0 right-0 w-1/3 h-full bg-accent/10 blur-[100px]" />
-           <div className="relative z-10 space-y-8 max-w-3xl mx-auto">
-              <span className="text-[10px] font-bold uppercase tracking-[0.8em] text-accent">Inquiry Admissions</span>
-              <h2 className="text-5xl lg:text-7xl font-bold tracking-tight">Your trajectory starts here.</h2>
-              <div className="w-24 h-px bg-accent mx-auto" />
-              <p className="text-slate-400 text-lg italic max-w-xl mx-auto">Join a hand-selected cohort of future digital leaders. Admissions are now open for the winter cycle.</p>
-              <div className="pt-10">
-                <Link to="/signup">
-                  <Button variant="gold" className="px-16 py-6 text-sm">Become a Member</Button>
-                </Link>
-              </div>
+      {/* Footer CTA */}
+      <section className="py-24 px-6 bg-white">
+        <div className="container mx-auto bg-primary rounded-[3rem] p-12 lg:p-24 text-white text-center space-y-8 relative overflow-hidden shadow-2xl shadow-primary/20">
+           <div className="absolute top-0 right-0 w-60 h-60 bg-white/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
+           <h2 className="text-4xl lg:text-6xl font-black leading-tight max-w-3xl mx-auto">Ready to develop your unique skills?</h2>
+           <p className="text-xl opacity-80 max-w-xl mx-auto">Join 10M+ students today and start your journey towards excellence.</p>
+           <div className="pt-8">
+             <Link to="/signup">
+               <Button className="bg-white text-primary hover:bg-white/90 px-16 py-6 text-xl">Get Started Now</Button>
+             </Link>
            </div>
         </div>
       </section>

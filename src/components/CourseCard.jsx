@@ -1,58 +1,60 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Star } from 'lucide-react';
+import { Users, BookOpen, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Button from './Button';
 
 const CourseCard = ({ course }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="bg-white border border-slate-100 rounded-none overflow-hidden hover:border-accent/40 transition-all duration-700 group flex flex-col h-full"
+      whileHover={{ y: -10 }}
+      className="bg-white p-4 rounded-[2rem] shadow-sm border border-transparent hover:border-primary/10 transition-all group overflow-hidden"
     >
       {/* Thumbnail */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-slate-100">
+      <div className="relative aspect-video rounded-[1.5rem] overflow-hidden mb-4 bg-gray-100">
         <img 
           src={course.image} 
           alt={course.title}
-          className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
-        <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-all duration-700" />
-        <div className="absolute bottom-6 left-6">
-          <span className="bg-primary/90 backdrop-blur-md text-white text-[9px] font-bold px-3 py-1.5 rounded-full uppercase tracking-[0.2em] shadow-lg">
-            {course.tag}
-          </span>
+        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary uppercase">
+          {course.tag || 'New'}
         </div>
       </div>
       
-      <div className="p-8 flex flex-col flex-grow space-y-6">
-        <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-          <span>{course.category}</span>
-          <div className="flex items-center gap-1 text-accent">
-            <Star size={12} fill="currentColor" />
-            <span>{course.level}</span>
+      <div className="space-y-4">
+        {/* Meta */}
+        <div className="flex items-center justify-between text-[11px] font-semibold text-gray-500">
+          <div className="flex items-center gap-1">
+            <BookOpen size={14} className="text-primary" />
+            <span>10 Lessons</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Users size={14} className="text-primary" />
+            <span>50+ Students</span>
           </div>
         </div>
 
-        <h3 className="text-2xl font-bold text-primary group-hover:text-accent transition-colors leading-tight min-h-[4rem]">
+        <h3 className="text-lg font-bold text-gray-900 leading-tight line-clamp-2 min-h-[3rem]">
           {course.title}
         </h3>
 
-        <div className="pt-6 border-t border-slate-50 mt-auto flex items-center justify-between">
-          <div className="flex flex-col">
-            <span className="text-[10px] text-slate-400 uppercase tracking-widest mb-1 italic">Investment</span>
-            <span className="text-xl font-bold text-primary">₹{course.price}</span>
+        <div className="pt-4 border-t border-gray-50 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200">
+              <img src={course.mentor.avatar} alt={course.mentor.name} className="w-full h-full object-cover" />
+            </div>
+            <span className="text-xs font-bold text-gray-600 truncate max-w-[80px]">{course.mentor.name}</span>
           </div>
-          
-          <Link to={`/course/${course.id}`}>
-            <button className="flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.2em] text-primary hover:text-accent transition-all group/btn">
-              View Collection
-              <ArrowRight size={14} className="group-hover/btn:translate-x-2 transition-transform duration-500" />
-            </button>
-          </Link>
+          <div className="flex flex-col items-end">
+            <span className="text-xl font-black text-primary">${course.price}</span>
+          </div>
         </div>
+        
+        <Link to={`/course/${course.id}`} className="block">
+          <button className="w-full py-3 bg-gray-50 text-gray-900 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+            Enroll Now
+          </button>
+        </Link>
       </div>
     </motion.div>
   );

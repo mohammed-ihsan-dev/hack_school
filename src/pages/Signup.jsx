@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { Compass, Mail, ArrowLeft, User, Key } from 'lucide-react';
+import { Mail, Lock, ArrowLeft, User } from 'lucide-react';
 import { FaGoogle } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import Button from '../components/Button';
@@ -12,15 +12,12 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success('Inquiry Submitted.', {
+    toast.success('Account created! Welcome to Etech.', {
       style: {
-        borderRadius: '0px',
-        background: '#0F172A',
+        borderRadius: '2rem',
+        background: '#8B5CF6',
         color: '#fff',
-        fontSize: '12px',
         fontWeight: 'bold',
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
       },
     });
     setTimeout(() => navigate('/login'), 1500);
@@ -30,108 +27,105 @@ const Signup = () => {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen flex flex-row-reverse"
+      className="min-h-screen flex flex-row-reverse bg-[#FDF4FF]"
     >
-      {/* Visual Panel */}
-      <div className="hidden lg:flex w-[40%] bg-primary relative overflow-hidden items-center justify-center p-20 shadow-2xl">
-        <div className="absolute inset-0 grayscale opacity-40">
-           <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop" className="w-full h-full object-cover" alt="Elite" />
-        </div>
-        <div className="absolute inset-0 bg-primary/60" />
+      {/* Right: Illustration Panel */}
+      <div className="hidden lg:flex w-1/2 bg-secondary relative overflow-hidden items-center justify-center p-20">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-secondary to-primary opacity-50" />
+        <div className="absolute top-0 left-0 w-80 h-80 bg-white/10 blur-[100px] rounded-full -translate-x-1/2 -translate-y-1/2" />
         
-        <div className="relative z-10 text-white space-y-16 max-w-sm text-center">
-          <Link to="/" className="inline-flex items-center gap-3 text-white/60 hover:text-white transition-all font-bold uppercase tracking-[0.4em] text-[10px] group">
+        <div className="relative z-10 text-white text-center space-y-12 max-w-lg">
+          <Link to="/" className="inline-flex items-center gap-3 text-white/70 hover:text-white transition-all font-bold uppercase tracking-widest text-xs group">
             <ArrowLeft className="group-hover:-translate-x-2 transition-transform" />
-            Home
+            Back to home
           </Link>
-          
-          <div className="space-y-8">
-            <div className="w-20 h-20 mx-auto border border-white/20 flex items-center justify-center text-white shadow-2xl rotate-45">
-              <Compass size={40} strokeWidth={1} className="-rotate-45" />
-            </div>
-            <h1 className="text-6xl font-bold tracking-tight italic">
-              Inquiry.
-            </h1>
-            <p className="text-white/60 text-lg font-medium italic leading-relaxed">
-              Submit your credentials for review. Join a cohort of visionary operatives.
-            </p>
+          <div className="space-y-6">
+            <h1 className="text-6xl font-black leading-tight italic">Design <br /> your <br /> future.</h1>
+            <p className="text-white/80 text-xl font-medium leading-relaxed">Create an account and access 50+ professional courses to start your journey.</p>
+          </div>
+          <div className="flex justify-center pt-8">
+             <div className="w-full aspect-[4/5] rounded-[3rem] overflow-hidden border-8 border-white/20 shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1544717297-fa154da09f9b?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover" alt="Student" />
+             </div>
           </div>
         </div>
       </div>
 
-      {/* Signup Form */}
-      <div className="w-full lg:w-[60%] bg-background flex items-center justify-center p-8 sm:p-24">
+      {/* Left: Form Panel */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 lg:p-24">
         <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-sm space-y-12"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="w-full max-w-md space-y-8"
         >
-          <div className="space-y-4 text-center">
-            <h2 className="text-4xl font-bold text-primary tracking-tight">Register</h2>
-            <div className="w-12 h-px bg-accent mx-auto" />
-            <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-[9px]">Admission Application</p>
+          <div className="space-y-4">
+            <h2 className="text-5xl font-black text-gray-900 tracking-tight">Sign Up</h2>
+            <p className="text-gray-400 font-bold uppercase tracking-widest text-xs">Fill in your information to get started</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-10">
-            <div className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-4">
               <Input 
                 label="Full Name" 
                 type="text" 
-                placeholder="Operative Name" 
+                placeholder="John Doe" 
                 icon={User} 
-                className="bg-transparent border-x-0 border-t-0 border-b-2 rounded-none px-0 focus:ring-0"
+                className="bg-white border-2 border-gray-100 rounded-3xl p-5 focus:border-primary"
                 required
               />
               <Input 
-                label="Professional Email" 
+                label="Email Address" 
                 type="email" 
-                placeholder="name@archives.edu" 
+                placeholder="you@example.com" 
                 icon={Mail} 
-                className="bg-transparent border-x-0 border-t-0 border-b-2 rounded-none px-0 focus:ring-0"
+                className="bg-white border-2 border-gray-100 rounded-3xl p-5 focus:border-primary"
                 required
               />
               <Input 
-                label="Private Key" 
+                label="Create Password" 
                 type="password" 
-                placeholder="Create Key" 
-                icon={Key} 
-                className="bg-transparent border-x-0 border-t-0 border-b-2 rounded-none px-0 focus:ring-0"
+                placeholder="••••••••" 
+                icon={Lock} 
+                className="bg-white border-2 border-gray-100 rounded-3xl p-5 focus:border-primary"
+                required
+              />
+              <Input 
+                label="Confirm Password" 
+                type="password" 
+                placeholder="••••••••" 
+                icon={Lock} 
+                className="bg-white border-2 border-gray-100 rounded-3xl p-5 focus:border-primary"
                 required
               />
             </div>
 
-            <div className="flex items-start gap-4 px-1">
-              <input type="checkbox" id="terms" className="mt-1 accent-accent h-3 w-3" required />
-              <label htmlFor="terms" className="text-[10px] font-bold text-slate-500 leading-relaxed uppercase tracking-widest">
-                I verify that my credentials are accurate and I agree to the <span className="text-accent underline underline-offset-4">Institutional Bylaws</span>.
+            <div className="flex items-start gap-3 px-3">
+              <input type="checkbox" id="terms" className="mt-1 accent-primary h-4 w-4 rounded-md" required />
+              <label htmlFor="terms" className="text-xs font-bold text-gray-500 leading-relaxed">
+                I agree to the <span className="text-primary hover:underline cursor-pointer">Terms & Conditions</span> and <span className="text-primary hover:underline cursor-pointer">Privacy Policy</span>.
               </label>
             </div>
 
-            <Button type="submit" variant="primary" className="w-full shadow-none">
-              Submit Inquiry
-            </Button>
+            <Button type="submit" className="w-full py-6 text-xl shadow-2xl shadow-primary/20">Sign Up Now</Button>
           </form>
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-100" />
+              <div className="w-full border-t border-gray-100" />
             </div>
-            <div className="relative flex justify-center text-[9px] uppercase font-black tracking-[0.4em]">
-              <span className="bg-background px-6 text-slate-300">Third Party</span>
+            <div className="relative flex justify-center text-xs uppercase font-black tracking-widest">
+              <span className="bg-[#FDF4FF] px-6 text-gray-400">Or sign up with</span>
             </div>
           </div>
 
-          <div className="flex flex-col gap-4">
-            <button className="flex items-center justify-center gap-4 py-3 border border-slate-100 font-bold text-[10px] uppercase tracking-widest hover:border-accent transition-all">
-              <FaGoogle className="text-primary text-lg" />
-              Google Authorization
-            </button>
-          </div>
+          <button className="w-full flex items-center justify-center gap-4 py-4 bg-white border-2 border-gray-100 rounded-3xl font-bold text-gray-700 hover:bg-gray-50 transition-all shadow-sm">
+            <FaGoogle className="text-red-500 text-xl" />
+            Google Account
+          </button>
 
-          <p className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-            Member? {' '}
-            <Link to="/login" className="text-accent font-black hover:underline underline-offset-4">Authorized Login</Link>
+          <p className="text-center text-sm font-bold text-gray-400">
+            Already have an account? {' '}
+            <Link to="/login" className="text-primary font-black hover:underline uppercase tracking-widest">Sign In</Link>
           </p>
         </motion.div>
       </div>
