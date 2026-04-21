@@ -2,8 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Rocket, ArrowLeft } from 'lucide-react';
-import { FaGithub } from 'react-icons/fa';
-
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -13,120 +12,131 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success('Successfully logged in!', {
-      icon: '🚀',
+    toast.success('Access Granted! Welcome back.', {
       style: {
-        borderRadius: '10px',
-        background: '#333',
+        borderRadius: '16px',
+        background: '#1e293b',
         color: '#fff',
+        fontSize: '14px',
+        fontWeight: 'bold',
       },
     });
     setTimeout(() => navigate('/'), 1500);
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left: Branding & Decoration */}
-      <div className="hidden lg:flex w-1/2 bg-slate-900 relative overflow-hidden items-center justify-center p-20">
-        <div className="absolute top-0 right-0 w-full h-full bg-gradient-primary opacity-20 blur-[120px]"></div>
-        <div className="relative z-10 text-white space-y-12">
-          <Link to="/" className="flex items-center gap-2 group">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen flex"
+    >
+      {/* Left: Branding & Tagline Content */}
+      <div className="hidden lg:flex w-[45%] bg-slate-900 relative overflow-hidden items-center justify-center p-20">
+        <div className="absolute top-0 right-0 w-full h-full bg-gradient-primary opacity-20 blur-[120px]" />
+        
+        <div className="relative z-10 text-white space-y-12 max-w-sm">
+          <Link to="/" className="inline-flex items-center gap-3 text-slate-400 hover:text-white transition-all font-bold uppercase tracking-widest text-xs group">
             <ArrowLeft className="group-hover:-translate-x-2 transition-transform" />
-            <span className="font-medium">Back to website</span>
+            Back to website
           </Link>
           
           <div className="space-y-6">
-            <div className="bg-gradient-primary w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-soft">
-              <Rocket size={32} />
+            <div className="bg-gradient-primary w-20 h-20 rounded-3xl flex items-center justify-center text-white shadow-2xl">
+              <Rocket size={40} />
             </div>
-            <h1 className="text-5xl font-bold leading-tight">
-              Start your journey <br /> with <span className="bg-gradient-primary bg-clip-text text-transparent italic">HackSchool</span>
+            <h1 className="text-6xl font-black leading-tight tracking-tighter">
+              Join the <br /> <span className="text-primary italic">Hackers</span>
             </h1>
-            <p className="text-slate-400 text-xl max-w-md">
-              Access your courses, community, and internship portal.
+            <p className="text-slate-400 text-xl font-medium leading-relaxed">
+              Log in to access your cohorts, counselor support, and internship portal.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 pt-12">
-            {[
-              { label: 'Courses', value: '25+' },
-              { label: 'Community', value: '10K+' },
-            ].map((stat, i) => (
-              <div key={i} className="space-y-2">
-                <div className="text-3xl font-bold">{stat.value}</div>
-                <div className="text-slate-500 font-medium uppercase tracking-widest text-xs">{stat.label}</div>
-              </div>
-            ))}
+          <div className="space-y-8 pt-10">
+             <div className="flex items-center gap-4">
+               <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-black">10K</div>
+               <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Active Operatives</p>
+             </div>
+             <div className="flex items-center gap-4">
+               <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-black">24</div>
+               <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Active Cohorts</p>
+             </div>
           </div>
         </div>
       </div>
 
       {/* Right: Login Form */}
-      <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-8 sm:p-12">
+      <div className="w-full lg:w-[55%] bg-white flex items-center justify-center p-8 sm:p-24">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-md space-y-10"
         >
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold text-slate-900">Welcome back!</h2>
-            <p className="text-slate-500 font-medium">Please enter your details to sign in.</p>
+            <h2 className="text-4xl font-black text-slate-900 tracking-tight">Identity Verification</h2>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Please enter your credentials to proceed</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <Input 
-              label="Email Address" 
-              type="email" 
-              placeholder="john@example.com" 
-              icon={Mail} 
-              required
-            />
-            <div className="space-y-1">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="space-y-6">
               <Input 
-                label="Password" 
-                type="password" 
-                placeholder="••••••••" 
-                icon={Lock} 
+                label="Registered Email" 
+                type="email" 
+                placeholder="operative@hackschool.com" 
+                icon={Mail} 
                 required
               />
-              <div className="flex justify-end pr-1">
-                <button type="button" className="text-xs font-bold text-primary hover:underline">Forgot Password?</button>
+              <div className="space-y-2">
+                <Input 
+                  label="Password" 
+                  type="password" 
+                  placeholder="••••••••" 
+                  icon={Lock} 
+                  required
+                />
+                <div className="flex items-center justify-between px-1">
+                  <div className="flex items-center gap-2">
+                    <input type="checkbox" id="remember" className="accent-primary h-4 w-4 rounded-md" />
+                    <label htmlFor="remember" className="text-xs font-bold text-slate-500 cursor-pointer">Remember me</label>
+                  </div>
+                  <button type="button" className="text-xs font-black text-primary hover:underline">Reset Password?</button>
+                </div>
               </div>
             </div>
 
-            <Button type="submit" className="w-full py-4 text-lg">
-              Sign In
+            <Button type="submit" className="w-full py-5 text-lg font-black uppercase tracking-widest shadow-xl shadow-primary/20">
+              Access Dashboard
             </Button>
           </form>
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-100"></div>
+              <div className="w-full border-t border-slate-100" />
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white px-4 text-slate-400 font-bold tracking-widest">Or continue with</span>
+            <div className="relative flex justify-center text-[10px] uppercase font-black tracking-[0.2em]">
+              <span className="bg-white px-6 text-slate-400">Secure Protocol</span>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <button className="flex items-center justify-center gap-3 py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all font-semibold">
-              <img src="https://www.google.com/favicon.ico" className="w-4 h-4" alt="Google" />
+            <button className="flex items-center justify-center gap-3 py-4 border border-slate-100 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl hover:border-slate-200 transition-all font-bold text-sm">
+              <FaGoogle className="text-red-500" />
               Google
             </button>
-            <button className="flex items-center justify-center gap-3 py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all font-semibold">
-              <FaGithub size={18} />
+            <button className="flex items-center justify-center gap-3 py-4 border border-slate-100 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl hover:border-slate-200 transition-all font-bold text-sm">
+              <FaGithub />
               GitHub
             </button>
-
           </div>
 
-          <p className="text-center text-sm font-medium text-slate-500">
-            Don't have an account? {' '}
-            <Link to="/signup" className="text-primary font-bold hover:underline">Sign up for free</Link>
+          <p className="text-center text-sm font-bold text-slate-400">
+            New here? {' '}
+            <Link to="/signup" className="text-primary font-black hover:underline uppercase tracking-widest">Create Identity</Link>
           </p>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

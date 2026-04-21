@@ -1,205 +1,215 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   CheckCircle2, 
   Calendar, 
-  Users, 
+  BarChart, 
   Star, 
-  PlayCircle, 
-  ArrowRight,
-  ChevronDown,
+  ShieldCheck, 
+  ChevronRight,
   Briefcase,
-  Award
+  PlayCircle,
+  Clock,
+  ArrowLeft
 } from 'lucide-react';
 import Button from '../components/Button';
+import { COURSES } from '../utils/mockData';
 
 const CourseDetails = () => {
   const { id } = useParams();
+  const course = COURSES.find(c => c.id === id);
 
-  // Mock data - in real app would fetch by id
-  const course = {
-    title: 'Performance Marketing & Digital Ads Masterclass',
-    mentor: 'Deepak Vishnode',
-    role: 'Growth Lead at Razorpay',
-    rating: 4.9,
-    reviews: 1240,
-    price: 4999,
-    oldPrice: 9999,
-    duration: '12 Weeks',
-    students: '2.5k+',
-    description: 'Learn the exact strategies used by top unicorn startups to scale their revenue through performance marketing. This program focuses on execution, data analysis, and scaling paid campaigns across Meta, Google, and LinkedIn.',
-    curriculum: [
-      { title: 'Module 1: Fundamentals of Digital Growth', duration: '2 Hours' },
-      { title: 'Module 2: Mastering Meta Ads Manager', duration: '4 Hours' },
-      { title: 'Module 3: Google Search & Display Network', duration: '5 Hours' },
-      { title: 'Module 4: Data Analytics & Attribution', duration: '3 Hours' },
-    ],
-    highlights: [
-      'Guaranteed Paid Internship',
-      'Direct Mentorship from Growth Leads',
-      'Life-time Access to Study Material',
-      'Industrial Certification',
-      'Exclusive Community Access'
-    ]
-  };
+  if (!course) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center space-y-6">
+          <h2 className="text-3xl font-bold">Course not found</h2>
+          <Link to="/courses">
+            <Button variant="outline">Back to Programs</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mx-auto px-6 py-12">
-      <div className="flex flex-col lg:flex-row gap-12 relative">
-        {/* Left Column: Content */}
-        <div className="flex-grow space-y-12">
-          {/* Header */}
-          <div className="space-y-6">
-            <nav className="flex text-sm text-slate-500 gap-2 font-medium">
-              <span>Courses</span>
-              <span>/</span>
-              <span className="text-primary font-bold">Marketing</span>
-            </nav>
-            
-            <h1 className="text-4xl lg:text-5xl font-bold leading-tight text-slate-900">
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      className="pb-32"
+    >
+      {/* Header Banner */}
+      <section className="bg-slate-900 pt-32 pb-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-primary opacity-10 blur-[120px]" />
+        <div className="container mx-auto px-6 relative z-10">
+          <Link to="/courses" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest mb-8">
+            <ArrowLeft size={16} />
+            Back to Programs
+          </Link>
+          
+          <div className="max-w-4xl space-y-6">
+            <div className="inline-block px-3 py-1 bg-primary/20 border border-primary/30 rounded-lg text-accent text-[10px] font-black uppercase tracking-widest">
+              {course.category}
+            </div>
+            <h1 className="text-4xl lg:text-7xl font-black text-white leading-tight">
               {course.title}
             </h1>
-
-            <div className="flex flex-wrap items-center gap-6 text-sm">
-              <div className="flex items-center gap-2">
-                <div className="flex text-yellow-400">
-                  {[1,2,3,4,5].map(i => <Star key={i} size={16} fill="currentColor" />)}
-                </div>
-                <span className="font-bold">{course.rating}</span>
-                <span className="text-slate-500">({course.reviews} reviews)</span>
+            <p className="text-slate-400 text-lg lg:text-2xl font-medium max-w-3xl leading-relaxed">
+              {course.description}
+            </p>
+            
+            <div className="flex flex-wrap items-center gap-8 pt-4">
+              <div className="flex items-center gap-2 text-white">
+                <Star className="text-yellow-400" size={20} fill="currentColor" />
+                <span className="font-bold text-lg">4.9/5</span>
+                <span className="text-slate-500 font-medium">(1.2k+ reviews)</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-600">
-                <Users size={18} className="text-primary" />
-                <span className="font-medium">{course.students} Students Enrolled</span>
+              <div className="h-4 w-px bg-slate-700 hidden sm:block" />
+              <div className="flex items-center gap-2 text-slate-300 font-bold uppercase tracking-widest text-xs">
+                <Clock size={18} className="text-primary" />
+                <span>{course.duration} Cohort</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-600">
-                <Calendar size={18} className="text-primary" />
-                <span className="font-medium">{course.duration} Cohort</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl w-fit">
-              <div className="w-12 h-12 bg-slate-200 rounded-full overflow-hidden">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Mentor" />
-              </div>
-              <div>
-                <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">Mentor</p>
-                <p className="font-bold text-slate-900">{course.mentor}</p>
-                <p className="text-xs text-slate-500">{course.role}</p>
+              <div className="flex items-center gap-2 text-slate-300 font-bold uppercase tracking-widest text-xs">
+                <BarChart size={18} className="text-primary" />
+                <span>{course.level}</span>
               </div>
             </div>
           </div>
-
-          {/* Overview */}
-          <section className="space-y-6">
-            <h2 className="text-2xl font-bold border-b border-slate-100 pb-4">Course Overview</h2>
-            <p className="text-slate-600 leading-relaxed text-lg">
-              {course.description}
-            </p>
-          </section>
-
-          {/* Curriculum */}
-          <section className="space-y-6">
-            <h2 className="text-2xl font-bold border-b border-slate-100 pb-4">What you'll learn</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {course.highlights.map((item, i) => (
-                <div key={i} className="flex items-start gap-3 p-3">
-                  <CheckCircle2 className="text-green-500 shrink-0" size={20} />
-                  <span className="text-slate-700 font-medium">{item}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Curriculum Detail */}
-          <section className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold">Curriculum</h2>
-              <span className="text-sm font-medium text-slate-500">{course.curriculum.length} Modules • Total 14h content</span>
-            </div>
-            <div className="space-y-4">
-              {course.curriculum.map((module, i) => (
-                <div key={i} className="group cursor-pointer">
-                  <div className="p-6 bg-white border border-slate-100 rounded-2xl flex items-center justify-between group-hover:border-primary/30 group-hover:bg-primary/5 transition-all">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-500 group-hover:bg-white group-hover:text-primary transition-colors">
-                        <PlayCircle size={20} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900">{module.title}</h4>
-                        <p className="text-xs text-slate-500">{module.duration}</p>
-                      </div>
-                    </div>
-                    <ChevronDown size={20} className="text-slate-300" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Internship Section */}
-          <section className="bg-gradient-primary rounded-3xl p-10 text-white relative overflow-hidden">
-             <div className="absolute top-0 right-0 p-8 opacity-10">
-               <Briefcase size={120} />
-             </div>
-             <div className="relative z-10 space-y-6">
-               <div className="inline-block px-4 py-1.5 bg-white/20 border border-white/30 rounded-full text-xs font-bold uppercase tracking-widest">
-                 Exclusives
-               </div>
-               <h2 className="text-3xl font-bold">Paid Internship Guaranteed</h2>
-               <p className="text-white/80 text-lg max-w-xl">
-                 After completing 8 weeks of training, you will be placed in a guaranteed 1-month paid internship with our partner startups to implement your learnings.
-               </p>
-               <div className="flex items-center gap-4 text-sm font-bold">
-                 <Award size={24} />
-                 <span>Stipend range: ₹10,000 - ₹25,000</span>
-               </div>
-             </div>
-          </section>
         </div>
+      </section>
 
-        {/* Right Column: Pricing Floating Card */}
-        <div className="lg:w-[400px] shrink-0">
-          <div className="sticky top-32 glass-card p-8 border-2 border-primary/10">
-             <div className="relative aspect-video rounded-xl overflow-hidden mb-8">
-               <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover" alt="Preview" />
-               <div className="absolute inset-0 bg-black/40 flex items-center justify-center group cursor-pointer">
-                 <PlayCircle size={64} className="text-white group-hover:scale-110 transition-transform" />
+      <div className="container mx-auto px-6 mt-16">
+        <div className="flex flex-col lg:flex-row gap-16 relative">
+          {/* Left Column: Course Info (2/3) */}
+          <div className="lg:w-2/3 space-y-16">
+            
+            {/* What you'll learn */}
+            <section className="space-y-8">
+              <h2 className="text-3xl font-black text-slate-900">What You'll <span className="text-primary italic">Hack</span></h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 scale-95 origin-left">
+                {course.whatYouWillLearn.map((item, i) => (
+                  <div key={i} className="flex items-start gap-4 p-4 bg-slate-50 border border-slate-100 rounded-2xl group hover:border-primary/20 transition-all">
+                    <CheckCircle2 className="text-green-500 shrink-0 mt-1" size={20} />
+                    <span className="text-slate-700 font-bold text-sm leading-relaxed">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Curriculum */}
+            <section className="space-y-8">
+              <div className="flex items-center justify-between">
+                <h2 className="text-3xl font-black text-slate-900">Curriculum</h2>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{course.modules} Modules Total</span>
+              </div>
+              <div className="space-y-4">
+                {course.curriculum.map((module, i) => (
+                  <div key={i} className="group p-6 bg-white border border-slate-100 rounded-[1.5rem] flex items-center justify-between hover:border-primary/30 hover:bg-slate-50/50 transition-all cursor-default">
+                    <div className="flex items-center gap-5">
+                      <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-white group-hover:text-primary transition-all shadow-sm">
+                        <span className="font-black text-lg">{i + 1}</span>
+                      </div>
+                      <h4 className="font-black text-slate-800 text-lg">{module}</h4>
+                    </div>
+                    <ChevronRight size={20} className="text-slate-200 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Internship Section */}
+            <section className="bg-gradient-primary rounded-[2.5rem] p-10 lg:p-16 text-white relative overflow-hidden shadow-2xl">
+               <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none">
+                 <Briefcase size={180} />
                </div>
-             </div>
+               <div className="relative z-10 space-y-6">
+                 <div className="inline-block px-4 py-1.5 bg-white/20 border border-white/30 rounded-lg text-[10px] font-black uppercase tracking-[0.2em]">
+                   Industry Training
+                 </div>
+                 <h2 className="text-4xl font-black">Guaranteed Paid Internship</h2>
+                 <p className="text-white/80 text-xl max-w-2xl font-medium leading-relaxed">
+                   After completing 8 weeks of intensive training, you'll be placed in a guaranteed 1-month paid internship with our partner venture-backed startups to implement your learnings at scale.
+                 </p>
+                 <div className="flex flex-wrap items-center gap-10 pt-8">
+                    <div className="space-y-1">
+                      <div className="text-[10px] font-bold text-white/50 uppercase tracking-widest">Duration</div>
+                      <div className="text-xl font-black">4 Weeks</div>
+                    </div>
+                    <div className="h-8 w-px bg-white/20" />
+                    <div className="space-y-1">
+                      <div className="text-[10px] font-bold text-white/50 uppercase tracking-widest">Stipend Range</div>
+                      <div className="text-xl font-black">₹10K - ₹25K</div>
+                    </div>
+                    <div className="h-8 w-px bg-white/20" />
+                    <div className="space-y-1">
+                      <div className="text-[10px] font-bold text-white/50 uppercase tracking-widest">Certificate</div>
+                      <div className="text-xl font-black">Startup Verified</div>
+                    </div>
+                 </div>
+               </div>
+            </section>
 
-             <div className="space-y-6">
-               <div className="flex items-baseline gap-4">
-                 <span className="text-4xl font-bold">₹{course.price}</span>
-                 <span className="text-xl text-slate-400 line-through">₹{course.oldPrice}</span>
-                 <span className="bg-green-100 text-green-600 text-xs font-bold px-2 py-1 rounded">50% OFF</span>
+            {/* Mentor Profile */}
+            <section className="space-y-8 bg-slate-50 p-12 rounded-[2.5rem] border border-slate-200">
+               <h2 className="text-2xl font-black">Led by the <span className="text-primary italic">Best</span></h2>
+               <div className="flex flex-col md:flex-row items-center gap-10">
+                 <div className="w-40 h-40 shrink-0 rounded-3xl overflow-hidden border-4 border-white shadow-xl">
+                   <img src={course.mentor.avatar} alt={course.mentor.name} className="w-full h-full object-cover" />
+                 </div>
+                 <div className="space-y-4 text-center md:text-left">
+                   <div>
+                     <h3 className="text-3xl font-black text-slate-900">{course.mentor.name}</h3>
+                     <p className="text-primary font-bold uppercase tracking-widest text-sm">{course.mentor.role}</p>
+                   </div>
+                   <p className="text-slate-600 text-lg font-medium leading-relaxed">
+                     {course.mentor.bio}
+                   </p>
+                 </div>
+               </div>
+            </section>
+          </div>
+
+          {/* Right Column: Sticky Pricing/CTA (1/3) */}
+          <div className="lg:w-1/3">
+            <div className="sticky top-32 glass-card p-10 border-2 border-primary/10 shadow-2xl space-y-8">
+               <div className="space-y-2">
+                 <div className="flex items-baseline gap-4">
+                   <span className="text-5xl font-black text-slate-900">₹{course.price}</span>
+                   <span className="text-xl text-slate-400 line-through font-bold">₹{course.oldPrice}</span>
+                 </div>
+                 <p className="text-green-600 font-black text-sm uppercase tracking-widest flex items-center gap-2">
+                   <ShieldCheck size={16} /> 
+                   Special Cohort Pricing
+                 </p>
                </div>
 
-               <Button className="w-full py-4 text-lg">Enroll Now</Button>
+               <Button className="w-full py-5 text-lg font-black uppercase tracking-widest">Enroll in Batch 12</Button>
+               <Button variant="outline" className="w-full py-5 text-sm font-black uppercase tracking-widest border-2">Talk to Counselor</Button>
                
-               <p className="text-center text-xs text-slate-500 font-medium">30-Day Money Back Guarantee</p>
+               <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">Limited Slots for Dec Cohort</p>
 
-               <div className="space-y-4 pt-6 border-t border-slate-100">
-                 <h4 className="font-bold text-sm text-slate-900">This course includes:</h4>
-                 <div className="space-y-3">
+               <div className="pt-8 border-t border-slate-100 space-y-6">
+                 <h4 className="font-black text-xs uppercase tracking-widest text-slate-900">Program Includes:</h4>
+                 <div className="space-y-4">
                     {[
-                      { icon: PlayCircle, text: '24 hours on-demand video' },
-                      { icon: Briefcase, text: 'Real-world project training' },
-                      { icon: Award, text: 'Certificate of completion' },
+                      { icon: PlayCircle, text: '24+ Hours Live Classes' },
+                      { icon: Briefcase, text: 'Execution-first Internship' },
+                      { icon: ShieldCheck, text: 'Industry Certification' },
+                      { icon: CheckCircle2, text: 'Lifetime Alumni Network' },
                     ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-3 text-sm text-slate-600 font-medium">
+                      <div key={i} className="flex items-center gap-4 text-sm text-slate-600 font-bold">
                         <item.icon size={18} className="text-primary" />
                         <span>{item.text}</span>
                       </div>
                     ))}
                  </div>
                </div>
-             </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

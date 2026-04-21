@@ -2,8 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Rocket, ArrowLeft, User } from 'lucide-react';
-import { FaGithub } from 'react-icons/fa';
-
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -13,131 +12,134 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success('Account created successfully!', {
-      icon: '✨',
+    toast.success('Onboarding Initiated! Check your email.', {
       style: {
-        borderRadius: '10px',
-        background: '#333',
+        borderRadius: '16px',
+        background: '#1e293b',
         color: '#fff',
+        fontSize: '14px',
+        fontWeight: 'bold',
       },
     });
     setTimeout(() => navigate('/login'), 1500);
   };
 
   return (
-    <div className="min-h-screen flex flex-row-reverse">
-      {/* Right: Branding & Decoration */}
-      <div className="hidden lg:flex w-1/2 bg-slate-900 relative overflow-hidden items-center justify-center p-20">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-primary opacity-20 blur-[120px]"></div>
-        <div className="relative z-10 text-white space-y-12">
-          <Link to="/" className="flex items-center gap-2 group">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen flex flex-row-reverse"
+    >
+      {/* Right: Branding Background */}
+      <div className="hidden lg:flex w-[45%] bg-slate-900 relative overflow-hidden items-center justify-center p-20">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-primary opacity-20 blur-[120px]" />
+        
+        <div className="relative z-10 text-white space-y-12 max-w-sm">
+          <Link to="/" className="inline-flex items-center gap-3 text-slate-400 hover:text-white transition-all font-bold uppercase tracking-widest text-xs group">
             <ArrowLeft className="group-hover:-translate-x-2 transition-transform" />
-            <span className="font-medium">Back to website</span>
+            Back to website
           </Link>
           
           <div className="space-y-6">
-            <div className="bg-gradient-primary w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-soft">
-              <Rocket size={32} />
+            <div className="bg-gradient-primary w-20 h-20 rounded-3xl flex items-center justify-center text-white shadow-2xl">
+              <Rocket size={40} />
             </div>
-            <h1 className="text-5xl font-bold leading-tight">
-              Join the <br /> <span className="bg-gradient-primary bg-clip-text text-transparent italic">Elite Hackers</span> Community
+            <h1 className="text-6xl font-black leading-tight tracking-tighter">
+              Start your <br /> <span className="text-primary italic">Trajectory</span>
             </h1>
-            <p className="text-slate-400 text-xl max-w-md">
-              Start your career with high-growth marketing cohorts and paid internships.
+            <p className="text-slate-400 text-xl font-medium leading-relaxed">
+              Join 5000+ operatives scaling their careers through intensive execution-first training.
             </p>
           </div>
 
-          <div className="space-y-6">
-             <div className="flex -space-x-3">
-               {[1,2,3,4,5].map(i => (
-                 <div key={i} className="w-12 h-12 rounded-full border-4 border-slate-900 bg-slate-700 flex items-center justify-center text-xs font-bold overflow-hidden">
-                   <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i}`} alt="user" />
-                 </div>
-               ))}
-               <div className="w-12 h-12 rounded-full border-4 border-slate-900 bg-primary flex items-center justify-center text-xs font-bold">
-                 +10k
-               </div>
+          <div className="pt-10">
+             <p className="text-xs font-bold text-slate-500 uppercase tracking-[0.3em] mb-6">Trusted Graduates At</p>
+             <div className="flex flex-wrap gap-8 opacity-40 font-black tracking-tighter grayscale">
+                <span>SWIGGY</span>
+                <span>RAZORPAY</span>
+                <span>CANVA</span>
              </div>
-             <p className="text-sm font-medium text-slate-500">Joined by developers & marketers worldwide</p>
           </div>
         </div>
       </div>
 
       {/* Left: Signup Form */}
-      <div className="w-full lg:w-1/2 bg-white flex items-center justify-center p-8 sm:p-12">
+      <div className="w-full lg:w-[55%] bg-white flex items-center justify-center p-8 sm:p-24">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           className="w-full max-w-md space-y-10"
         >
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold text-slate-900">Create account</h2>
-            <p className="text-slate-500 font-medium">Join us and start your high-growth journey.</p>
+            <h2 className="text-4xl font-black text-slate-900 tracking-tight">Onboarding</h2>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Create your professional identity</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <Input 
-              label="Full Name" 
-              type="text" 
-              placeholder="John Doe" 
-              icon={User} 
-              required
-            />
-            <Input 
-              label="Email Address" 
-              type="email" 
-              placeholder="john@example.com" 
-              icon={Mail} 
-              required
-            />
-            <Input 
-              label="Password" 
-              type="password" 
-              placeholder="Min. 8 characters" 
-              icon={Lock} 
-              required
-            />
+            <div className="grid grid-cols-1 gap-6">
+              <Input 
+                label="Full Name" 
+                type="text" 
+                placeholder="John " 
+                icon={User} 
+                required
+              />
+              <Input 
+                label="Professional Email" 
+                type="email" 
+                placeholder="john@operative.io" 
+                icon={Mail} 
+                required
+              />
+              <Input 
+                label="Password" 
+                type="password" 
+                placeholder="Minimum 8 characters" 
+                icon={Lock} 
+                required
+              />
+            </div>
 
-            <div className="flex items-start gap-3">
-              <input type="checkbox" id="terms" className="mt-1 accent-primary h-4 w-4" required />
-              <label htmlFor="terms" className="text-xs text-slate-500 leading-relaxed cursor-pointer">
-                By signing up, you agree to our <span className="text-primary font-bold">Terms of Service</span> and <span className="text-primary font-bold">Privacy Policy</span>.
+            <div className="flex items-start gap-3 px-1">
+              <input type="checkbox" id="terms" className="mt-1 accent-primary h-4 w-4 rounded-md" required />
+              <label htmlFor="terms" className="text-[11px] font-bold text-slate-500 leading-tight cursor-pointer">
+                I verify that the information provided is accurate and I agree to the HackSchool <span className="text-primary">Operational Protocol</span> and <span className="text-primary">Privacy Policy</span>.
               </label>
             </div>
 
-            <Button type="submit" className="w-full py-4 text-lg">
-              Create My Account
+            <Button type="submit" className="w-full py-5 text-lg font-black uppercase tracking-widest shadow-xl shadow-primary/20">
+              Initialize Account
             </Button>
           </form>
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-100"></div>
+              <div className="w-full border-t border-slate-100" />
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white px-4 text-slate-400 font-bold tracking-widest">Or sign up with</span>
+            <div className="relative flex justify-center text-[10px] uppercase font-black tracking-[0.2em]">
+              <span className="bg-white px-6 text-slate-400">Collaborative Entry</span>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <button className="flex items-center justify-center gap-3 py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all font-semibold">
-              <img src="https://www.google.com/favicon.ico" className="w-4 h-4" alt="Google" />
+            <button className="flex items-center justify-center gap-3 py-4 border border-slate-100 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition-all font-bold text-sm">
+              <FaGoogle className="text-red-500" />
               Google
             </button>
-            <button className="flex items-center justify-center gap-3 py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all font-semibold">
-              <FaGithub size={18} />
+            <button className="flex items-center justify-center gap-3 py-4 border border-slate-100 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition-all font-bold text-sm">
+              <FaGithub />
               GitHub
             </button>
-
           </div>
 
-          <p className="text-center text-sm font-medium text-slate-500">
+          <p className="text-center text-sm font-bold text-slate-400">
             Already have an account? {' '}
-            <Link to="/login" className="text-primary font-bold hover:underline">Log in here</Link>
+            <Link to="/login" className="text-primary font-black hover:underline uppercase tracking-widest">Sign In</Link>
           </p>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
