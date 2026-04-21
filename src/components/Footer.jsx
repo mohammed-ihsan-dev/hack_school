@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Twitter, Linkedin, Github, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import { FaTwitter, FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
+
 
 const Footer = () => {
   return (
@@ -15,12 +17,13 @@ const Footer = () => {
               Build your unique skills with a world-leading platform for business development and career excellence.
             </p>
             <div className="flex gap-4">
-              {[Twitter, Linkedin, Github, Instagram].map((Icon, idx) => (
+              {[FaTwitter, FaLinkedin, FaGithub, FaInstagram].map((Icon, idx) => (
                 <a key={idx} href="#" className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all">
                   <Icon size={18} />
                 </a>
               ))}
             </div>
+
           </div>
 
           <div className="space-y-8">
