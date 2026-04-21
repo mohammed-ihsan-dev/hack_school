@@ -81,9 +81,6 @@ const Footer = () => {
           <p className="text-slate-500 text-[11px] font-bold uppercase tracking-widest">
             © {new Date().getFullYear()} HackSchool Education Pvt Ltd.
           </p>
-          <div className="flex gap-8 text-[11px] font-bold uppercase tracking-widest text-slate-500">
-             <span className="hover:text-primary cursor-pointer transition-colors">Made with ❤️ in India</span>
-          </div>
         </div>
       </div>
     </footer>

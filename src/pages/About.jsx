@@ -43,16 +43,16 @@ const About = () => {
             className="relative"
           >
             <div className="w-full h-[500px] bg-primary/10 rounded-[60px] relative overflow-hidden flex items-center justify-center">
-              <img 
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200" 
+              <img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200"
                 className="w-4/5 h-4/5 object-cover rounded-[40px] shadow-2xl floating"
                 alt="HackSchool Team"
               />
             </div>
             {/* Absolute Badges */}
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-secondary rounded-full flex flex-col items-center justify-center text-white text-center p-4 border-8 border-white shadow-xl -rotate-12">
-               <FiAward size={24} className="mb-1" />
-               <p className="text-[10px] font-bold uppercase tracking-tight">Best EdTech Award '24</p>
+              <FiAward size={24} className="mb-1" />
+              <p className="text-[10px] font-bold uppercase tracking-tight">Best EdTech Award '24</p>
             </div>
           </motion.div>
         </div>
@@ -62,12 +62,12 @@ const About = () => {
       <section className="bg-dark py-20">
         <div className="container mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-12">
           {STATS.map((stat, idx) => (
-            <motion.div 
-               key={idx}
-               initial={{ opacity: 0, y: 20 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               transition={{ delay: idx * 0.1 }}
-               className="text-center"
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              className="text-center"
             >
               <div className="text-5xl md:text-6xl font-extrabold text-white mb-2 font-heading tracking-tighter">
                 {stat.value}
@@ -87,7 +87,7 @@ const About = () => {
             <h2 className="text-4xl font-extrabold font-heading mb-4">Why We're Different</h2>
             <div className="w-20 h-1.5 bg-primary mx-auto rounded-full mb-8"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               { title: "Real Stipends", desc: "No more free internships. We ensure our students get paid while they learn.", icon: "💸" },
@@ -109,9 +109,9 @@ const About = () => {
       {/* 4. FINAL CTA */}
       <section className="container mx-auto px-6 py-20">
         <div className="bg-slate-50 rounded-[40px] px-12 py-20 text-center border border-slate-100">
-           <h2 className="text-4xl font-extrabold font-heading mb-8">Ready to join the movement?</h2>
-           <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">Stop worrying about the job market. Start building the skills that make companies worry about losing you.</p>
-           <button className="btn-primary text-xl px-12 py-5 rounded-2xl">Start Your Journey Today</button>
+          <h2 className="text-4xl font-extrabold font-heading mb-8">Ready to join the movement?</h2>
+          <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">Stop worrying about the job market. Start building the skills that make companies worry about losing you.</p>
+          <button className="btn-primary text-xl px-12 py-5 rounded-2xl">Start Your Journey Today</button>
         </div>
       </section>
     </div>

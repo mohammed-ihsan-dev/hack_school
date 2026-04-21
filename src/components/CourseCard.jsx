@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiStar as Star, FiClock as Clock, FiBookOpen as BookOpen, FiChevronRight as ChevronRight } from 'react-icons/fi';
+import { FiStar as Star, FiClock as Clock, FiBookOpen as BookOpen, FiChevronRight as ChevronRight, FiZap } from 'react-icons/fi';
 import Button from './Button';
 
 const CourseCard = ({ course }) => {
@@ -22,7 +22,7 @@ const CourseCard = ({ course }) => {
           </span>
           {course.isInternship && (
             <span className="bg-emerald-500/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg flex items-center gap-1">
-              Internship 💰
+              Internship <FiZap size={10} />
             </span>
           )}
         </div>

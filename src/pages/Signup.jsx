@@ -116,7 +116,7 @@ const Signup = () => {
         </div>
 
         <p className="text-center mt-8 text-sm text-slate-500 font-medium">
-          Already have an account? <Link to="/login" className="text-primary font-bold hover:underline">Log In →</Link>
+          Already have an account? <Link to="/login" className="text-primary font-bold hover:underline">Log In</Link>
         </p>
       </motion.div>
     </div>
