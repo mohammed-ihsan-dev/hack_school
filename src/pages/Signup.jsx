@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, Rocket, ArrowLeft, User } from 'lucide-react';
-import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { Compass, Mail, ArrowLeft, User, Key } from 'lucide-react';
+import { FaGoogle } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -12,13 +12,15 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success('Onboarding Initiated! Check your email.', {
+    toast.success('Inquiry Submitted.', {
       style: {
-        borderRadius: '16px',
-        background: '#1e293b',
+        borderRadius: '0px',
+        background: '#0F172A',
         color: '#fff',
-        fontSize: '14px',
+        fontSize: '12px',
         fontWeight: 'bold',
+        letterSpacing: '0.1em',
+        textTransform: 'uppercase',
       },
     });
     setTimeout(() => navigate('/login'), 1500);
@@ -31,93 +33,83 @@ const Signup = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen flex flex-row-reverse"
     >
-      {/* Right: Branding Background */}
-      <div className="hidden lg:flex w-[45%] bg-slate-900 relative overflow-hidden items-center justify-center p-20">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-primary opacity-20 blur-[120px]" />
+      {/* Visual Panel */}
+      <div className="hidden lg:flex w-[40%] bg-primary relative overflow-hidden items-center justify-center p-20 shadow-2xl">
+        <div className="absolute inset-0 grayscale opacity-40">
+           <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop" className="w-full h-full object-cover" alt="Elite" />
+        </div>
+        <div className="absolute inset-0 bg-primary/60" />
         
-        <div className="relative z-10 text-white space-y-12 max-w-sm">
-          <Link to="/" className="inline-flex items-center gap-3 text-slate-400 hover:text-white transition-all font-bold uppercase tracking-widest text-xs group">
+        <div className="relative z-10 text-white space-y-16 max-w-sm text-center">
+          <Link to="/" className="inline-flex items-center gap-3 text-white/60 hover:text-white transition-all font-bold uppercase tracking-[0.4em] text-[10px] group">
             <ArrowLeft className="group-hover:-translate-x-2 transition-transform" />
-            Back to website
+            Home
           </Link>
           
-          <div className="space-y-6">
-            <div className="bg-gradient-primary w-20 h-20 rounded-3xl flex items-center justify-center text-white shadow-2xl">
-              <Rocket size={40} />
+          <div className="space-y-8">
+            <div className="w-20 h-20 mx-auto border border-white/20 flex items-center justify-center text-white shadow-2xl rotate-45">
+              <Compass size={40} strokeWidth={1} className="-rotate-45" />
             </div>
-            <h1 className="text-6xl font-black leading-tight tracking-tighter">
-              Start your <br /> <span className="text-primary italic">Trajectory</span>
+            <h1 className="text-6xl font-bold tracking-tight italic">
+              Inquiry.
             </h1>
-            <p className="text-slate-400 text-xl font-medium leading-relaxed">
-              Join 5000+ operatives scaling their careers through intensive execution-first training.
+            <p className="text-white/60 text-lg font-medium italic leading-relaxed">
+              Submit your credentials for review. Join a cohort of visionary operatives.
             </p>
-          </div>
-
-          <div className="pt-10">
-             <p className="text-xs font-bold text-slate-500 uppercase tracking-[0.3em] mb-6">Trusted Graduates At</p>
-             <div className="flex flex-wrap gap-8 opacity-40 font-black tracking-tighter grayscale">
-                <span>SWIGGY</span>
-                <span>RAZORPAY</span>
-                <span>CANVA</span>
-             </div>
           </div>
         </div>
       </div>
 
-      {/* Left: Signup Form */}
-      <div className="w-full lg:w-[55%] bg-white flex items-center justify-center p-8 sm:p-24">
+      {/* Signup Form */}
+      <div className="w-full lg:w-[60%] bg-background flex items-center justify-center p-8 sm:p-24">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="w-full max-w-md space-y-10"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-sm space-y-12"
         >
-          <div className="space-y-2">
-            <h2 className="text-4xl font-black text-slate-900 tracking-tight">Onboarding</h2>
-            <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Create your professional identity</p>
+          <div className="space-y-4 text-center">
+            <h2 className="text-4xl font-bold text-primary tracking-tight">Register</h2>
+            <div className="w-12 h-px bg-accent mx-auto" />
+            <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-[9px]">Admission Application</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 gap-6">
+          <form onSubmit={handleSubmit} className="space-y-10">
+            <div className="space-y-8">
               <Input 
                 label="Full Name" 
                 type="text" 
-                placeholder="John " 
+                placeholder="Operative Name" 
                 icon={User} 
+                className="bg-transparent border-x-0 border-t-0 border-b-2 rounded-none px-0 focus:ring-0"
                 required
               />
               <Input 
                 label="Professional Email" 
                 type="email" 
-                placeholder="john@operative.io" 
+                placeholder="name@archives.edu" 
                 icon={Mail} 
+                className="bg-transparent border-x-0 border-t-0 border-b-2 rounded-none px-0 focus:ring-0"
                 required
               />
               <Input 
-                label="Password" 
+                label="Private Key" 
                 type="password" 
-                placeholder="Minimum 8 characters" 
-                icon={Lock} 
+                placeholder="Create Key" 
+                icon={Key} 
+                className="bg-transparent border-x-0 border-t-0 border-b-2 rounded-none px-0 focus:ring-0"
                 required
               />
-              <Input 
-                label="Confirm Password" 
-                type="password" 
-                placeholder="Repeat your password" 
-                icon={Lock} 
-                required
-              />
-
             </div>
 
-            <div className="flex items-start gap-3 px-1">
-              <input type="checkbox" id="terms" className="mt-1 accent-primary h-4 w-4 rounded-md" required />
-              <label htmlFor="terms" className="text-[11px] font-bold text-slate-500 leading-tight cursor-pointer">
-                I verify that the information provided is accurate and I agree to the HackSchool <span className="text-primary">Operational Protocol</span> and <span className="text-primary">Privacy Policy</span>.
+            <div className="flex items-start gap-4 px-1">
+              <input type="checkbox" id="terms" className="mt-1 accent-accent h-3 w-3" required />
+              <label htmlFor="terms" className="text-[10px] font-bold text-slate-500 leading-relaxed uppercase tracking-widest">
+                I verify that my credentials are accurate and I agree to the <span className="text-accent underline underline-offset-4">Institutional Bylaws</span>.
               </label>
             </div>
 
-            <Button type="submit" className="w-full py-5 text-lg font-black uppercase tracking-widest shadow-xl shadow-primary/20">
-              Initialize Account
+            <Button type="submit" variant="primary" className="w-full shadow-none">
+              Submit Inquiry
             </Button>
           </form>
 
@@ -125,25 +117,21 @@ const Signup = () => {
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-100" />
             </div>
-            <div className="relative flex justify-center text-[10px] uppercase font-black tracking-[0.2em]">
-              <span className="bg-white px-6 text-slate-400">Collaborative Entry</span>
+            <div className="relative flex justify-center text-[9px] uppercase font-black tracking-[0.4em]">
+              <span className="bg-background px-6 text-slate-300">Third Party</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <button className="flex items-center justify-center gap-3 py-4 border border-slate-100 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition-all font-bold text-sm">
-              <FaGoogle className="text-red-500" />
-              Google
-            </button>
-            <button className="flex items-center justify-center gap-3 py-4 border border-slate-100 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-xl transition-all font-bold text-sm">
-              <FaGithub />
-              GitHub
+          <div className="flex flex-col gap-4">
+            <button className="flex items-center justify-center gap-4 py-3 border border-slate-100 font-bold text-[10px] uppercase tracking-widest hover:border-accent transition-all">
+              <FaGoogle className="text-primary text-lg" />
+              Google Authorization
             </button>
           </div>
 
-          <p className="text-center text-sm font-bold text-slate-400">
-            Already have an account? {' '}
-            <Link to="/login" className="text-primary font-black hover:underline uppercase tracking-widest">Sign In</Link>
+          <p className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+            Member? {' '}
+            <Link to="/login" className="text-accent font-black hover:underline underline-offset-4">Authorized Login</Link>
           </p>
         </motion.div>
       </div>

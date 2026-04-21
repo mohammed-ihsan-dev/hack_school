@@ -1,19 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Target, Users, MapPin, Award, Rocket, Globe } from 'lucide-react';
-import Button from '../components/Button';
+import { Shield, Target, Compass, Award } from 'lucide-react';
+import { TEAM } from '../utils/mockData';
 
 const About = () => {
-  const team = [
-    { name: 'Ihsan Mohammed', role: 'Founder & CEO', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ihsan' },
-    { name: 'Sarah Jenkins', role: 'Head of Content', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=SarahJ' },
-    { name: 'Deepak Vishnode', role: 'Lead Mentor', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Deepak' },
-  ];
-
-  const milestones = [
-    { icon: Users, title: '5000+', desc: 'Students across the globe' },
-    { icon: Globe, title: '12+', desc: 'Partnering Startups' },
-    { icon: Award, title: '95%', desc: 'Placement Rate' },
+  const values = [
+    { icon: Shield, title: 'Discipline', desc: 'Rigorous attention to detail in every strategy execution.' },
+    { icon: Target, title: 'Vision', desc: 'Anticipating market shifts before they become mainstream.' },
+    { icon: Compass, title: 'Guidance', desc: 'Direct apprenticeship under established industry operators.' },
+    { icon: Award, title: 'Legacy', desc: 'Building careers that stand the test of time, not just trends.' },
   ];
 
   return (
@@ -21,101 +16,89 @@ const About = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pb-32"
+      className="pb-52"
     >
-
-      {/* Hero */}
-      <section className="bg-slate-900 pt-32 pb-20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-full h-full bg-gradient-primary opacity-10 blur-[120px]" />
-        <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-          <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 border border-primary/30 rounded-full text-accent font-bold text-xs uppercase tracking-widest">
-              Our Story
-            </div>
-            <h1 className="text-4xl lg:text-7xl font-bold text-white leading-tight">
-              We're building the <br /> 
-              <span className="text-primary italic">Hackers of Tomorrow</span>
-            </h1>
-            <p className="text-slate-400 text-lg lg:text-xl leading-relaxed">
-              HackSchool was born out of a simple problem: the gap between academic theory and industry reality. We're on a mission to democratize elite career training.
-            </p>
+      {/* Editorial Hero */}
+      <section className="bg-slate-900 pt-56 pb-40 relative overflow-hidden">
+        <div className="absolute inset-0 grayscale opacity-20 brightness-50">
+           <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" className="w-full h-full object-cover" alt="Institutional" />
+        </div>
+        <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center space-y-10">
+          <div className="inline-flex items-center gap-4 mx-auto">
+             <div className="w-10 h-px bg-accent" />
+             <span className="text-[10px] font-bold text-accent uppercase tracking-[0.5em]">Philosophy</span>
+             <div className="w-10 h-px bg-accent" />
           </div>
-          <div className="relative">
-             <div className="aspect-square bg-slate-800 rounded-3xl overflow-hidden border border-slate-700 relative">
-               <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover opacity-60" alt="Team" />
-               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
-             </div>
-             {/* Floating Badge */}
-             <div className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-2xl border border-slate-100 hidden md:block">
-               <Rocket className="text-primary mb-4" size={32} />
-               <h4 className="text-2xl font-extrabold text-slate-900">2024</h4>
-               <p className="text-slate-500 font-bold text-xs uppercase tracking-widest">Year of Impact</p>
-             </div>
-          </div>
+          <h1 className="text-5xl lg:text-9xl font-bold text-white tracking-tighter leading-none">
+            The Institutional <br />
+            <span className="italic font-light">Standard.</span>
+          </h1>
+          <p className="text-slate-400 text-xl lg:text-2xl max-w-3xl mx-auto italic font-medium leading-relaxed">
+            Founded in 2024, HackSchool was established to bridge the gap between academic theory and institutional-grade digital execution.
+          </p>
         </div>
       </section>
 
-      {/* Mission */}
-      <section className="py-32 container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 order-2 lg:order-1">
-             {milestones.map((m, i) => (
-                <div key={i} className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm hover:shadow-xl transition-all">
-                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
-                    <m.icon size={24} />
-                  </div>
-                  <h3 className="text-3xl font-extrabold mb-2">{m.title}</h3>
-                  <p className="text-slate-500 font-medium">{m.desc}</p>
-                </div>
-             ))}
-             <div className="p-8 bg-gradient-primary rounded-3xl flex flex-col justify-center text-white">
-               <h3 className="text-2xl font-bold mb-2 italic">And counting...</h3>
-               <p className="text-white/80 font-medium">Join our mission to transform digital careers.</p>
-             </div>
-          </div>
-          <div className="space-y-8 order-1 lg:order-2">
-            <h2 className="text-4xl font-bold">Why we built HackSchool</h2>
-            <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
-              <p>
-                The traditional education system is slow. Industry moves fast. We realized that by the time a student completes a degree, the digital platforms like Google, Meta, and AI tools have evolved five times over.
-              </p>
-              <p>
-                HackSchool is our solution. An execution-focused platform where you don't just "learn" — you hack your way into high-growth roles through real budgets and actual company projects.
-              </p>
+      {/* Values Section */}
+      <section className="container mx-auto px-6 lg:px-12 py-40">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20">
+          {values.map((v, i) => (
+            <div key={i} className="text-center space-y-8 group">
+              <div className="w-20 h-20 mx-auto border border-slate-100 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-700 rotate-45">
+                <v.icon size={32} strokeWidth={1} className="-rotate-45" />
+              </div>
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold uppercase tracking-[0.2em]">{v.title}</h3>
+                <p className="text-slate-500 text-sm italic leading-relaxed">{v.desc}</p>
+              </div>
             </div>
-            <Button className="py-4 px-10">Join the movement</Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="container mx-auto px-6 text-center py-20 bg-slate-50 rounded-[4rem]">
-        <h2 className="text-4xl font-bold mb-16">Meet the <span className="text-primary italic">Architects</span></h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {team.map((member, i) => (
-            <motion.div 
-               key={i}
-               whileHover={{ y: -10 }}
-               className="space-y-6"
-            >
-              <div className="w-48 h-48 mx-auto bg-white rounded-full border-4 border-white shadow-xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
-                <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-slate-900">{member.name}</h3>
-                <p className="text-primary font-bold uppercase tracking-widest text-xs">{member.role}</p>
-              </div>
-            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Trust Logos Placeholder */}
-      <section className="container mx-auto px-6 pt-32 text-center">
-        <p className="text-slate-400 font-bold uppercase tracking-[0.3em] text-xs mb-12">Trusted by industry leaders from</p>
-        <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-24 opacity-30 grayscale">
-          {['Razorpay', 'Swiggy', 'Zomato', 'Canva', 'Slack'].map(l => (
-            <span key={l} className="text-2xl font-extrabold tracking-tighter">{l}</span>
+      {/* Founder Message Section */}
+      <section className="bg-white py-40 border-y border-slate-50">
+        <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+           <div className="space-y-12">
+              <div className="space-y-6">
+                <span className="text-[10px] font-black uppercase tracking-[0.5em] text-accent">The Vision</span>
+                <h2 className="text-4xl lg:text-6xl font-bold text-primary tracking-tight italic">Beyond the pixels.</h2>
+              </div>
+              <div className="space-y-8 text-lg font-medium text-slate-600 leading-loose italic">
+                 <p>"Digital marketing is often reduced to buttons and tools. We believe it is a psychological craft, a strategic game, and an institutional discipline."</p>
+                 <p>"We didn't build just another course platform. We built a residency for the next generation of marketing architects."</p>
+              </div>
+              <div className="pt-6">
+                 <div className="text-xl font-bold text-primary font-serif">Ihsan Mohammed</div>
+                 <div className="text-[10px] font-bold text-accent uppercase tracking-[0.3em] mt-1">Founder & Chief Strategist</div>
+              </div>
+           </div>
+           <div className="relative aspect-[4/5] overflow-hidden grayscale shadow-2xl">
+              <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop" className="w-full h-full object-cover origin-top hover:scale-110 transition-all duration-1000" alt="Executive" />
+              <div className="absolute inset-0 border-[20px] border-white/20 m-10" />
+           </div>
+        </div>
+      </section>
+
+      {/* Team Archives */}
+      <section className="container mx-auto px-6 lg:px-12 py-40">
+        <div className="text-center space-y-6 mb-24">
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-accent">Board of Directors</span>
+          <h2 className="text-4xl lg:text-6xl font-bold text-primary">Master Operators.</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-20">
+          {TEAM.map((member, i) => (
+            <div key={i} className="text-center group">
+              <div className="aspect-[3/4] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-1000 mb-8 border border-slate-100 shadow-xl relative">
+                <img src={member.image} className="w-full h-full object-cover" alt={member.name} />
+                <div className="absolute inset-x-0 bottom-0 p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-700 bg-primary/90 backdrop-blur-md">
+                   <p className="text-[10px] text-white font-bold uppercase tracking-widest italic">{member.bio || 'Institutional lead with 10+ years of high-budget strategy execution.'}</p>
+                </div>
+              </div>
+              <h4 className="text-xl font-bold text-primary uppercase tracking-[0.2em]">{member.name}</h4>
+              <p className="text-[10px] font-bold text-accent uppercase tracking-[0.3em] mt-2">{member.role}</p>
+            </div>
           ))}
         </div>
       </section>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Rocket, Target, Users, Zap, ArrowRight, Quote, CheckCircle } from 'lucide-react';
+import { Star, ArrowRight, Quote, ShieldCheck, Globe, Trophy } from 'lucide-react';
 import Button from '../components/Button';
 import CourseCard from '../components/CourseCard';
 import { COURSES, TESTIMONIALS, STATS } from '../utils/mockData';
@@ -12,216 +12,180 @@ const Home = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="space-y-32"
+      className="space-y-40 pb-40"
     >
-      {/* 1. Hero Section - Textured & Dynamic */}
-      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
-        {/* Background Textures */}
-        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_20%,#C4B5FD20_0%,transparent_50%)]" />
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/10 rounded-full blur-[100px]" />
+      {/* Hero Section - Classic High Contrast */}
+      <section className="relative min-h-screen flex items-center pt-20">
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-100/50" />
+          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-[100px]" />
+        </div>
         
-        <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="space-y-10"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-100 rounded-full shadow-sm">
-              <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-slate-500">Live: Enrollment open for Batch 12</span>
+            <div className="inline-flex items-center gap-3">
+              <div className="w-10 h-px bg-accent" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-accent">Established MMXXIV</span>
             </div>
             
-            <h1 className="text-5xl lg:text-8xl font-black leading-[0.95] text-slate-900 tracking-tighter">
-              Hack the industry. <br />
-              <span className="bg-gradient-primary bg-clip-text text-transparent italic">Own your career.</span>
+            <h1 className="text-6xl lg:text-8xl font-bold leading-tight text-primary drop-shadow-sm">
+              The Art of <br />
+              <span className="italic font-light">Digital Mastery.</span>
             </h1>
             
-            <p className="text-slate-600 text-lg lg:text-2xl leading-relaxed max-w-xl font-medium">
-              Join elite marketing cohorts led by unicorn operators. Learn by execution, land a <span className="text-primary font-bold">paid internship</span>, and scale to high-growth roles.
+            <p className="text-slate-500 text-lg lg:text-xl leading-relaxed max-w-lg font-medium italic">
+              Cultivating the next generation of marketing visionaries through high-budget execution and exclusive mentorship.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link to="/signup">
-                <Button className="py-5 px-12 text-lg shadow-2xl shadow-primary/30">
-                  Join the cohort
-                  <ArrowRight size={20} />
-                </Button>
-              </Link>
+            <div className="flex flex-col sm:flex-row gap-8 pt-6">
               <Link to="/courses">
-                <Button variant="outline" className="py-5 px-12 text-lg bg-white">
-                  View Programs
-                </Button>
+                <Button variant="primary" className="px-12 py-4">Explore Collections</Button>
               </Link>
-            </div>
-            
-            <div className="flex items-center gap-6 pt-4 grayscale opacity-40 overflow-hidden">
-               {['Google', 'Meta', 'Amazon', 'Shopify'].map(l => (
-                 <span key={l} className="text-xl font-black tracking-tighter uppercase">{l}</span>
-               ))}
+              <Link to="/about">
+                <Button variant="ghost" className="text-primary hover:text-accent font-black tracking-[0.3em]">Our Philosophy</Button>
+              </Link>
             </div>
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative hidden lg:block"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            className="relative lg:h-[700px] overflow-hidden shadow-2xl"
           >
-            <div className="absolute inset-0 bg-primary/20 blur-[120px] rounded-full translate-x-10 translate-y-10" />
-            <div className="relative glass-card p-4 rounded-[2.5rem] border-2 border-white overflow-hidden shadow-2xl">
-              <img 
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 
-                className="w-full h-full object-cover rounded-[2rem]"
-                alt="Hackers at work"
-              />
-              <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/90 backdrop-blur-xl rounded-2xl border border-white/50 shadow-2xl flex items-center justify-between">
-                 <div>
-                   <div className="text-3xl font-black text-primary leading-none mb-1">10X</div>
-                   <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Growth Potential</div>
-                 </div>
-                 <div className="flex -space-x-3">
-                   {[1,2,3,4].map(i => (
-                     <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 overflow-hidden">
-                       <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i+10}`} alt="Student" />
-                     </div>
-                   ))}
-                 </div>
-              </div>
+            <img 
+              src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop" 
+              className="w-full h-full object-cover grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition-all duration-1000"
+              alt="Executive"
+            />
+            <div className="absolute bottom-12 right-12 text-white text-right space-y-2">
+              <div className="text-5xl font-bold italic tracking-tighter">Legacy</div>
+              <div className="text-[10px] font-bold uppercase tracking-[0.3em] opacity-80 underline underline-offset-8">Scroll to unfold</div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* 2. Stats Bar - Clean & Informative */}
-      <section className="bg-slate-900 py-10 relative overflow-hidden">
-        <div className="container mx-auto px-6 overflow-x-auto scrollbar-hide">
-          <div className="flex justify-between items-center min-w-[800px]">
+      {/* Stats Bar - Refined Ivory */}
+      <section className="bg-white py-24 border-y border-slate-50">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-0">
             {STATS.map((stat, idx) => (
               <motion.div 
                 key={idx}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center md:text-left border-l first:border-0 border-slate-700 px-12 py-4"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                className="text-center px-10 border-x border-slate-50 first:border-0 last:border-0"
               >
-                <div className="text-3xl lg:text-5xl font-black text-white mb-2">{stat.value}</div>
-                <div className="text-primary font-bold uppercase tracking-[0.2em] text-[10px]">{stat.label}</div>
+                <div className="text-5xl font-bold text-primary mb-3">
+                  {stat.value}
+                </div>
+                <div className="text-[10px] font-bold text-accent uppercase tracking-[0.3em]">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3. Featured Courses Grid */}
-      <section className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
-          <div className="space-y-4">
-            <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-lg text-primary text-[10px] font-black uppercase tracking-widest">Enrollment Open</div>
-            <h2 className="text-4xl lg:text-6xl font-black text-slate-900 leading-tight">Elite <span className="text-primary italic">Career</span> Cohorts</h2>
-            <p className="text-slate-500 text-lg max-w-xl font-medium">Curated by operators, not instructors. Built for those who execute.</p>
-          </div>
-          <Link to="/courses">
-            <Button variant="outline" className="border-2 py-4 px-8 font-bold">Explore All Cohorts</Button>
-          </Link>
+      {/* Featured Courses - Minimal Grid */}
+      <section className="container mx-auto px-6 lg:px-12">
+        <div className="flex flex-col items-center text-center space-y-6 mb-24">
+          <span className="text-[10px] font-black uppercase tracking-[0.5em] text-accent">Active Cohorts</span>
+          <h2 className="text-4xl lg:text-6xl font-bold text-primary">Curated Masterclasses</h2>
+          <div className="w-20 h-px bg-accent mx-auto mt-4" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {COURSES.map((course, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+          {COURSES.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))}
         </div>
       </section>
 
-      {/* 4. Why HackSchool - Cards with Icons */}
-      <section className="container mx-auto px-6">
-        <div className="bg-slate-100/50 rounded-[4rem] p-12 lg:p-24 border border-slate-200">
-          <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
-            <h2 className="text-4xl lg:text-5xl font-black">Why leading marketers <br /> <span className="text-primary italic">trust us</span></h2>
-            <p className="text-slate-500 font-medium">We've ripped up the textbook and replaced it with a real marketing engine.</p>
+      {/* Why Section - Classic Iconography */}
+      <section className="bg-primary/5 py-40">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="space-y-12">
+              <div className="space-y-6">
+                <span className="text-[10px] font-black uppercase tracking-[0.5em] text-accent">Institutional Excellence</span>
+                <h2 className="text-4xl lg:text-5xl font-bold text-primary leading-tight">The Foundation of Success.</h2>
+                <p className="text-slate-500 text-lg leading-relaxed italic">At HackSchool, we treat digital marketing as a high-stake craft, blending classical discipline with modern execution.</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {[
+                  { icon: ShieldCheck, title: "Trust & Ethics", desc: "Rigorous standards for data and strategy." },
+                  { icon: Globe, title: "Global Network", desc: "Access to venture-backed startups worldwide." },
+                  { icon: Trophy, title: "Elite Placement", desc: "Guaranteed 1-month residency with partners." },
+                  { icon: Star, title: "Master Mentors", desc: "Direct guidance from established operators." }
+                ].map((f, i) => (
+                  <div key={i} className="space-y-4">
+                    <div className="text-accent">
+                      <f.icon size={32} strokeWidth={1} />
+                    </div>
+                    <h3 className="text-lg font-bold text-primary uppercase tracking-widest">{f.title}</h3>
+                    <p className="text-slate-500 text-xs leading-relaxed font-bold uppercase tracking-widest opacity-60">{f.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative aspect-[3/4] overflow-hidden">
+               <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" className="w-full h-full object-cover brightness-75 transition-all duration-1000 grayscale origin-top scale-110 hover:scale-100" alt="Office" />
+               <div className="absolute inset-0 border-[20px] border-white/10 m-8" />
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: Zap, title: "Execution First", desc: "No boring lectures. You get a budget and a goal. Execute or pivot." },
-              { icon: Target, title: "Unicorn Mentorship", desc: "Direct 1:1 sessions with growth leads from top startups." },
-              { icon: Users, title: "Exclusive Network", desc: "Access the private discord with over 5000+ elite operatives." },
-              { icon: CheckCircle, title: "Paid Placements", desc: "Guaranteed 1-month paid internship with our partner startups." }
-            ].map((f, i) => (
+      {/* Testimonials - Elegant Quote Section */}
+      <section className="container mx-auto px-6 lg:px-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+            {TESTIMONIALS.map((t, i) => (
               <motion.div
                 key={i}
-                whileHover={{ y: -10 }}
-                className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm hover:shadow-2xl transition-all group"
+                className="text-center space-y-10"
               >
-                <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                  <f.icon size={28} />
+                <div className="text-accent flex justify-center">
+                  <Quote size={40} className="opacity-20" />
                 </div>
-                <h3 className="text-xl font-black mb-4">{f.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed font-medium">{f.desc}</p>
+                <p className="text-xl font-medium text-slate-700 italic leading-relaxed">"{t.quote}"</p>
+                <div className="flex flex-col items-center gap-4">
+                   <div className="w-16 h-16 rounded-none rotate-45 overflow-hidden border border-accent/20">
+                     <img src={t.avatar} className="-rotate-45 scale-150 grayscale" alt={t.name} />
+                   </div>
+                   <div className="pt-4">
+                     <h4 className="text-sm font-bold text-primary uppercase tracking-[0.2em]">{t.name}</h4>
+                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{t.role}</p>
+                   </div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 5. Testimonials - Proof of Impact */}
-      <section className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto text-center space-y-12 mb-20 font-medium">
-           <Quote size={64} className="mx-auto text-primary/20" />
-           <h2 className="text-4xl lg:text-5xl font-black">Success Stories</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {TESTIMONIALS.map((t, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="p-10 bg-white border border-slate-100 rounded-3xl shadow-sm relative"
-            >
-              <div className="flex gap-1 mb-6 text-yellow-400">
-                {[...Array(t.rating)].map((_, j) => <CheckCircle key={j} size={14} fill="currentColor" />)}
+      {/* CTA Section - Dark Institutional Banner */}
+      <section className="container mx-auto px-6 lg:px-12">
+        <div className="bg-primary text-white p-20 lg:p-32 relative overflow-hidden text-center space-y-12">
+           <div className="absolute top-0 right-0 w-1/3 h-full bg-accent/10 blur-[100px]" />
+           <div className="relative z-10 space-y-8 max-w-3xl mx-auto">
+              <span className="text-[10px] font-bold uppercase tracking-[0.8em] text-accent">Inquiry Admissions</span>
+              <h2 className="text-5xl lg:text-7xl font-bold tracking-tight">Your trajectory starts here.</h2>
+              <div className="w-24 h-px bg-accent mx-auto" />
+              <p className="text-slate-400 text-lg italic max-w-xl mx-auto">Join a hand-selected cohort of future digital leaders. Admissions are now open for the winter cycle.</p>
+              <div className="pt-10">
+                <Link to="/signup">
+                  <Button variant="gold" className="px-16 py-6 text-sm">Become a Member</Button>
+                </Link>
               </div>
-              <p className="text-slate-700 italic mb-8 leading-relaxed font-medium">"{t.quote}"</p>
-              <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
-                 <div className="w-12 h-12 rounded-full overflow-hidden border border-slate-200">
-                   <img src={t.avatar} alt={t.name} />
-                 </div>
-                 <div>
-                   <h4 className="font-extrabold text-slate-900">{t.name}</h4>
-                   <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t.role}</p>
-                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* 6. CTA Banner - Dark/Gradient Bg */}
-      <section className="container mx-auto px-6 mb-32">
-        <div className="relative bg-slate-900 rounded-[3rem] p-16 lg:p-24 overflow-hidden text-center lg:text-left">
-          <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-primary opacity-20 blur-[120px] pointer-events-none" />
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <h2 className="text-4xl lg:text-6xl font-black text-white leading-[1.1]">The world's best <br /> <span className="text-accent italic">Hackers</span> are here.</h2>
-              <p className="text-slate-400 text-lg lg:text-xl font-medium max-w-lg">Apply for the next cohort and transform your career in 12 weeks. Your growth trajectory starts here.</p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                 <Button className="py-5 px-12 text-lg">Enroll into Batch 12</Button>
-                 <Button variant="ghost" className="text-white hover:bg-white/10 py-5 px-12 text-lg border border-white/10">Talk to Counselor</Button>
-              </div>
-            </div>
-            <div className="hidden lg:block relative">
-               <div className="grid grid-cols-2 gap-6">
-                 {[1,2,3,4].map(i => (
-                   <div key={i} className="aspect-square bg-slate-800 rounded-3xl border border-slate-700/50 flex items-center justify-center text-slate-600 animate-pulse">
-                     <Rocket size={48} className="opacity-10" />
-                   </div>
-                 ))}
-               </div>
-            </div>
-          </div>
+           </div>
         </div>
       </section>
     </motion.div>
