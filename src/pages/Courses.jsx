@@ -1,74 +1,114 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Search, Filter } from 'lucide-react';
-import { COURSES } from '../utils/mockData';
+import React, { useState } from 'react';
+import { FiSearch as Search, FiSliders as SlidersHorizontal } from 'react-icons/fi';
+import { LuPackageOpen as PackageOpen } from 'react-icons/lu';
+import { motion, AnimatePresence } from 'framer-motion';
 import CourseCard from '../components/CourseCard';
-import Button from '../components/Button';
+import { COURSES } from '../utils/mockData';
+
+const Levels = ['All', 'Beginner', 'Advanced'];
 
 const Courses = () => {
+  const [selectedLevel, setSelectedLevel] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredCourses = COURSES.filter(course => {
+    const matchesLevel = selectedLevel === 'All' || course.level === selectedLevel;
+    const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesLevel && matchesSearch;
+  });
+
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="bg-[#FDF4FF] min-h-screen pb-32"
-    >
-      {/* Header */}
-      <section className="pt-40 pb-20 px-6 bg-gradient-to-br from-primary to-[#A78BFA] text-white">
-        <div className="container mx-auto text-center space-y-6">
-          <h1 className="text-4xl lg:text-6xl font-black tracking-tight">Our Knowledge Hub</h1>
-          <p className="text-white/80 max-w-2xl mx-auto text-lg font-medium">Explore 80+ world-class courses designed to accelerate your career and personal growth.</p>
-          
-          <div className="max-w-2xl mx-auto relative pt-8 group">
-            <Search className="absolute left-10 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors" />
-            <input 
-              type="text" 
-              placeholder="Search for your next skill..."
-              className="w-full pl-20 pr-40 py-6 bg-white text-gray-900 border-none rounded-full focus:ring-4 focus:ring-primary/20 outline-none transition-all shadow-xl"
-            />
-            <Button variant="primary" className="absolute right-3 top-3 bottom-3 px-10 shadow-none">Find Course</Button>
-          </div>
+    <div className="pt-24 pb-20">
+      {/* HEADER SECTION */}
+      <section className="bg-primary/5 py-24 mb-12">
+        <div className="container mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-2xl mx-auto"
+          >
+            <span className="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-4 block">100% Outcome Oriented</span>
+            <h1 className="text-4xl md:text-6xl font-extrabold font-heading mb-6 tracking-tight">Boost Your Career <br /> with <span className="text-primary">HackSchool</span></h1>
+            <p className="text-slate-500 font-inter leading-relaxed">Choose from our list of expert-led bootcamps and start your journey with a paid internship guaranteed for top performers.</p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Grid */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="flex flex-col lg:flex-row gap-12">
-          {/* Sidebar (Optional UI) */}
-          <div className="lg:w-1/4 space-y-8 hidden lg:block">
-            <div className="bg-white p-8 rounded-[2.5rem] shadow-sm space-y-8">
-              <h4 className="text-lg font-black text-gray-900">Categories</h4>
-              <div className="space-y-4">
-                {['All Courses', 'Marketing', 'SEO', 'Branding', 'Analytics'].map((tag) => (
-                  <label key={tag} className="flex items-center gap-3 cursor-pointer group">
-                    <input type="checkbox" className="w-5 h-5 accent-primary rounded-lg" defaultChecked={tag === 'All Courses'} />
-                    <span className="text-sm font-bold text-gray-600 group-hover:text-primary transition-colors">{tag}</span>
-                  </label>
-                ))}
-              </div>
-              <div className="pt-4">
-                 <Button variant="outline" className="w-full text-xs py-3">Clear Filters</Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:w-3/4 space-y-12">
-            <div className="flex items-center justify-between">
-              <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">Showing {COURSES.length} Courses</p>
-              <button className="flex items-center gap-2 text-primary font-black lg:hidden">
-                <Filter size={18} /> Filters
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {COURSES.map((course) => (
-                <CourseCard key={course.id} course={course} />
+      {/* FILTER & SEARCH BAR */}
+      <section className="sticky top-[76px] z-30 bg-white/80 backdrop-blur-md border-b border-slate-100 py-6 mb-12">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
+            {/* Level Pills */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 w-full lg:w-auto scrollbar-hide">
+              {Levels.map(lvl => (
+                <button
+                  key={lvl}
+                  onClick={() => setSelectedLevel(lvl)}
+                  className={`
+                    px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap
+                    ${selectedLevel === lvl 
+                      ? 'bg-primary text-white shadow-lg shadow-primary/30' 
+                      : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}
+                  `}
+                >
+                  {lvl}
+                </button>
               ))}
             </div>
+
+            {/* Search */}
+            <div className="relative w-full lg:w-80">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <input 
+                type="text" 
+                placeholder="Find your bootcamp..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-11 pr-4 py-3.5 bg-slate-50 rounded-2xl text-sm border-transparent focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all outline-none font-medium"
+              />
+            </div>
           </div>
         </div>
       </section>
-    </motion.div>
+
+      {/* COURSE GRID */}
+      <section className="container mx-auto px-6">
+        <AnimatePresence mode='wait'>
+          {filteredCourses.length > 0 ? (
+            <motion.div 
+              key="grid"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+            >
+              {filteredCourses.map(course => (
+                <CourseCard key={course.id} course={course} />
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div 
+              key="empty"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-col items-center justify-center py-32 text-center"
+            >
+              <div className="w-24 h-24 rounded-3xl bg-slate-50 flex items-center justify-center text-slate-300 mb-6">
+                <PackageOpen size={48} />
+              </div>
+              <h3 className="text-2xl font-bold text-dark mb-2 font-heading">No such program yet</h3>
+              <p className="text-slate-500 font-inter max-w-xs mx-auto">Try adjusting your filters or search terms for better results.</p>
+              <button 
+                onClick={() => {setSelectedLevel('All'); setSearchQuery('');}}
+                className="mt-8 text-primary font-bold hover:underline underline-offset-4"
+              >
+                Clear all filters
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </section>
+    </div>
   );
 };
 

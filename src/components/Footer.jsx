@@ -1,78 +1,88 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin } from 'lucide-react';
-import { FaTwitter, FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
-
+import { FaTwitter, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import Logo from './Logo';
 
 const Footer = () => {
   return (
-    <footer className="bg-white pt-24 pb-12 border-t border-gray-100">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-          <div className="space-y-6">
-            <Link to="/" className="text-3xl font-black text-gray-900 tracking-tight">
-              Etech<span className="text-primary">.</span>
+    <footer className="bg-dark text-white pt-24 pb-12 overflow-hidden relative">
+      {/* Background Glow */}
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+          {/* Brand */}
+          <div className="col-span-1 md:col-span-1">
+            <Link to="/" className="flex items-center gap-3 mb-8">
+              <Logo className="w-12 h-12" />
+              <span className="text-2xl font-black font-heading tracking-tight">HackSchool</span>
             </Link>
-            <p className="text-gray-500 font-medium leading-relaxed">
-              Build your unique skills with a world-leading platform for business development and career excellence.
+            <p className="text-slate-400 mb-8 leading-relaxed font-inter">
+              The #1 outcome-driven training platform for digital marketing careers. Learn, earn, and get placed at top startups.
             </p>
             <div className="flex gap-4">
-              {[FaTwitter, FaLinkedin, FaGithub, FaInstagram].map((Icon, idx) => (
-                <a key={idx} href="#" className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all">
-                  <Icon size={18} />
+              {[
+                { icon: <FaTwitter />, link: "#" },
+                { icon: <FaInstagram />, link: "#" },
+                { icon: <FaLinkedinIn />, link: "#" },
+                { icon: <FaGithub />, link: "#" }
+              ].map((social, i) => (
+                <a 
+                  key={i} 
+                  href={social.link} 
+                  className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all duration-300 border border-white/10"
+                >
+                  {social.icon}
                 </a>
               ))}
             </div>
-
           </div>
 
-          <div className="space-y-8">
-            <h4 className="text-xl font-black text-gray-900">Explore</h4>
+          {/* Explore */}
+          <div className="lg:ml-12">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-8">Explore</h4>
             <ul className="space-y-4">
-              {['Home', 'About Us', 'Courses', 'Instructors', 'Benefits'].map((link) => (
-                <li key={link}>
-                  <Link to="/" className="text-gray-500 font-semibold hover:text-primary transition-colors">{link}</Link>
-                </li>
-              ))}
+              <li><Link to="/" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Home</Link></li>
+              <li><Link to="/courses" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Bootcamps</Link></li>
+              <li><Link to="/about" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Our Story</Link></li>
+              <li><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Success Wall</a></li>
             </ul>
           </div>
 
-          <div className="space-y-8">
-            <h4 className="text-xl font-black text-gray-900">Support</h4>
+          {/* Company */}
+          <div className="lg:ml-12">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-8">Support</h4>
             <ul className="space-y-4">
-              {['Help Center', 'Safety Center', 'Community Guidelines', 'Privacy Policy', 'Cookie Policy'].map((link) => (
-                <li key={link}>
-                  <Link to="/" className="text-gray-500 font-semibold hover:text-primary transition-colors">{link}</Link>
-                </li>
-              ))}
+              <li><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Help Center</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Privacy Policy</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Terms of Use</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Contact Us</a></li>
             </ul>
           </div>
 
-          <div className="space-y-8">
-            <h4 className="text-xl font-black text-gray-900">Contact</h4>
-            <ul className="space-y-6">
-              <li className="flex gap-4 text-gray-500">
-                <MapPin className="text-primary shrink-0" size={20} />
-                <span className="font-semibold text-sm">123 Learning Lane, EdTech Hub, Earth</span>
-              </li>
-              <li className="flex gap-4 text-gray-500">
-                <Phone className="text-primary shrink-0" size={20} />
-                <span className="font-semibold text-sm">+91 (800) ETECH-101</span>
-              </li>
-              <li className="flex gap-4 text-gray-500">
-                <Mail className="text-primary shrink-0" size={20} />
-                <span className="font-semibold text-sm">support@etech.com</span>
-              </li>
-            </ul>
+          {/* Newsletter */}
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-8">Newsletter</h4>
+            <p className="text-xs text-slate-400 mb-6 font-medium leading-relaxed">Join 5,000+ subscribers for the latest marketing tips & cohort updates.</p>
+            <div className="flex flex-col gap-3">
+              <input 
+                type="email" 
+                placeholder="you@example.com"
+                className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/50 transition-colors w-full"
+              />
+              <button className="bg-primary hover:bg-secondary py-3 rounded-xl text-sm font-bold transition-all shadow-lg shadow-primary/20">
+                Subscribe
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-gray-400 text-sm font-bold uppercase tracking-widest">© 2024 Etech Platform. All rights reserved.</p>
-          <div className="flex gap-8 text-gray-400 text-sm font-bold uppercase tracking-widest">
-            <Link to="/" className="hover:text-primary">Terms</Link>
-            <Link to="/" className="hover:text-primary">Privacy</Link>
-            <Link to="/" className="hover:text-primary">Cookies</Link>
+        <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-slate-500 text-[11px] font-bold uppercase tracking-widest">
+            © {new Date().getFullYear()} HackSchool Education Pvt Ltd.
+          </p>
+          <div className="flex gap-8 text-[11px] font-bold uppercase tracking-widest text-slate-500">
+             <span className="hover:text-primary cursor-pointer transition-colors">Made with ❤️ in India</span>
           </div>
         </div>
       </div>

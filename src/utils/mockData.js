@@ -1,153 +1,130 @@
 export const COURSES = [
   {
-    id: "performance-marketing-mastery",
-    title: "Performance Marketing & Digital Ads Mastery",
-    category: "Digital Marketing",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-    duration: "12 Weeks",
-    level: "Intermediate",
-    price: 4999,
-    oldPrice: 9999,
-    tag: "Bestseller",
-    modules: 18,
-    description: "Master the art of scaling brands using paid advertisements on Meta, Google, and LinkedIn. Learn attribution, funnel optimization, and data-driven decision making.",
-    whatYouWillLearn: [
-      "End-to-end Funnel Building",
-      "Advanced Meta Ads Tracking & Custom Conversions",
-      "Google Search & Display Network Strategy",
-      "Attribution Models & Lift Studies",
-      "Scaling Budgets from $100 to $10,000/day"
-    ],
-    curriculum: [
-      "Module 1: The Economics of Digital Growth",
-      "Module 2: Landing Page UX & Conversion Rate Optimization",
-      "Module 3: Facebook & Instagram Ads Mechanics",
-      "Module 4: Scaling Strategies for E-commerce & SaaS",
-      "Module 5: Performance Creative & Hook Writing"
-    ],
-    mentor: {
-      name: "Deepak Vishnode",
-      role: "Growth Lead at Razorpay",
-      bio: "Deepak has managed over $50M in ad spend for major unicorn startups in India and SE Asia.",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-    }
-  },
-  {
-    id: "seo-high-growth",
-    title: "SEO & Organic Content Strategy for High Growth",
-    category: "SEO & Content",
-    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop",
-    duration: "8 Weeks",
-    level: "Beginner to Pro",
-    price: 3499,
-    oldPrice: 6999,
-    tag: "Trending",
-    modules: 12,
-    description: "Rank on Page 1 without spending a dime on ads. Learn semantic SEO, technical site audits, and high-convert content clusters.",
-    whatYouWillLearn: [
-      "Semantic SEO & Entity Mapping",
-      "Technical Site Audit & Web Vitals",
-      "Backlink Strategy & Digital PR",
-      "Content Cluster Implementation",
-      "Local SEO for Service Businesses"
-    ],
-    curriculum: [
-      "Module 1: Search Engine Psychology",
-      "Module 2: Keyword Research in the AI Era",
-      "Module 3: Technical SEO Mastery",
-      "Module 4: Content Operations at Scale"
-    ],
-    mentor: {
-      name: "Sarah Jenkins",
-      role: "SEO Director at Canva",
-      bio: "Sarah scaled Canva's organic traffic by 400% in just 18 months using modular SEO strategies.",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
-    }
-  },
-  {
-    id: "social-media-branding",
-    title: "Personal Branding & Social Media Management",
-    category: "Branding",
-    image: "https://images.unsplash.com/photo-1611162617263-4ec3060a058e?q=80&w=2148&auto=format&fit=crop",
-    duration: "10 Weeks",
+    id: 1,
+    title: "Mastering Performance Marketing & Meta Ads",
+    category: "Marketing",
     level: "Beginner",
-    price: 3999,
-    oldPrice: 7999,
-    tag: "Most Popular",
-    modules: 15,
-    description: "Build a brand that people trust. Learn the secrets of storytelling, community building, and viral content creation.",
-    whatYouWillLearn: [
-      "Storytelling for Professional Brands",
-      "LinkedIn & Twitter Growth Playbook",
-      "Short-form Video Strategy (Reels/Shorts)",
-      "Community Management & Engagement",
-      "Monetizing Personal Brands"
-    ],
-    curriculum: [
-      "Module 1: Defining Your Brand Identity",
-      "Module 2: The Art of Hook & Retention",
-      "Module 3: Platform Specific Algorithms",
-      "Module 4: Automation & Tools for Creators"
-    ],
+    rating: 4.9,
+    reviews: 1250,
+    duration: "12 Weeks",
+    lessons: 45,
+    price: 4999,
+    originalPrice: 14999,
+    discount: "67% off",
+    isInternship: true,
+    stipend: "₹15,000",
+    image: "https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&q=80&w=600",
     mentor: {
-      name: "Rohan Khanna",
-      role: "Founder, BrandEngine",
-      bio: "Rohan has helped over 100+ founders build their personal brands on LinkedIn and Twitter.",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rohan"
-    }
+      name: "Siddharth Malhotra",
+      avatar: "https://i.pravatar.cc/150?u=siddharth",
+    },
+  },
+  {
+    id: 2,
+    title: "Advanced SEO & Content Strategy 2024",
+    category: "Marketing",
+    level: "Advanced",
+    rating: 4.8,
+    reviews: 840,
+    duration: "10 Weeks",
+    lessons: 32,
+    price: 3999,
+    originalPrice: 9999,
+    discount: "60% off",
+    isInternship: true,
+    stipend: "₹12,000",
+    image: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?auto=format&fit=crop&q=80&w=600",
+    mentor: {
+      name: "Neha Gupta",
+      avatar: "https://i.pravatar.cc/150?u=neha",
+    },
+  },
+  {
+    id: 3,
+    title: "Social Media Branding & Influencer Marketing",
+    category: "Marketing",
+    level: "Beginner",
+    rating: 4.7,
+    reviews: 560,
+    duration: "8 Weeks",
+    lessons: 28,
+    price: 2999,
+    originalPrice: 7999,
+    discount: "62% off",
+    isInternship: false,
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=600",
+    mentor: {
+      name: "Sahil Khan",
+      avatar: "https://i.pravatar.cc/150?u=sahil",
+    },
+  },
+  {
+    id: 4,
+    title: "Data-Driven Marketing Analytics with Python",
+    category: "Data",
+    level: "Advanced",
+    rating: 4.9,
+    reviews: 320,
+    duration: "14 Weeks",
+    lessons: 52,
+    price: 6999,
+    originalPrice: 19999,
+    discount: "65% off",
+    isInternship: true,
+    stipend: "₹18,000",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600",
+    mentor: {
+      name: "Dr. Ananya Roy",
+      avatar: "https://i.pravatar.cc/150?u=ananya_roy",
+    },
   }
 ];
 
 export const TESTIMONIALS = [
   {
-    name: "Ankit Sharma",
+    id: 1,
+    name: "Aman Verma",
     role: "Digital Marketer at Swiggy",
-    quote: "HackSchool's performance marketing cohort was a game changer for me. I landed my job right after the internship!",
     rating: 5,
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ankit"
+    quote: "The practical projects and the ₹15k stipend during my internship were game-changers. I got placed even before finishing!",
+    avatar: "https://i.pravatar.cc/150?u=aman"
   },
   {
-    name: "Priya Varma",
-    role: "Freelance SEO Expert",
-    quote: "The technical SEO modules are pure gold. I'm now providing actual ROI to my clients thanks to Sarah's mentorship.",
+    id: 2,
+    name: "Riya Sharma",
+    role: "SEO Specialist at Zomato",
     rating: 5,
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya"
-  },
-  {
-    name: "Vikram Malhotra",
-    role: "Growth Manager",
-    quote: "The only platform that focuses on executing with real budgets. No generic theory, just pure action.",
-    rating: 4,
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vikram"
+    quote: "HackSchool's mentors are industry leaders. The SEO course is very deep and the placement cells are very active.",
+    avatar: "https://i.pravatar.cc/150?u=riya"
   }
 ];
 
 export const STATS = [
-  { label: 'Students', value: '5000+' },
-  { label: 'Courses', value: '20+' },
-  { label: 'Placement', value: '95%' },
-  { label: 'Rating', value: '4.9' },
+  { label: "Students Trained", value: "5,000+" },
+  { label: "Placement Rate", value: "98%" },
+  { label: "Internship Success", value: "1,200+" },
+  { label: "Avg. Stipend", value: "₹15K" }
 ];
 
-export const TEAM = [
+export const FEATURES = [
   {
-    name: "Ihsan Mohammed",
-    role: "Founder & Chief Strategist",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ihsan",
-    bio: "Visionary leader with 10+ years in institutional growth and digital transformation."
+    title: "Paid Internship",
+    description: "Earn ₹15,000+ stipend while working on real company projects.",
+    icon: "Stipend"
   },
   {
-    name: "Sarah Jenkins",
-    role: "Academic Director",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
-    bio: "Ex-Canva SEO lead, specializing in large-scale organic growth frameworks."
+    title: "Job Assistance",
+    description: "Direct referrals to top startups and 100% placement support.",
+    icon: "Briefcase"
   },
   {
-    name: "Deepak Vishnode",
-    role: "Operating Partner",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
-    bio: "Performance architecture expert with over $50M in managed institutional spend."
+    title: "Live Projects",
+    description: "Build a portfolio with actual campaigns and performance data.",
+    icon: "Target"
+  },
+  {
+    title: "Expert Mentors",
+    description: "Learn from people who have managed ₹10Cr+ in ad spend.",
+    icon: "Users"
   }
 ];
-
-

@@ -1,60 +1,88 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, BookOpen, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { FiStar as Star, FiClock as Clock, FiBookOpen as BookOpen, FiChevronRight as ChevronRight } from 'react-icons/fi';
+import Button from './Button';
 
 const CourseCard = ({ course }) => {
   return (
     <motion.div
-      whileHover={{ y: -10 }}
-      className="bg-white p-4 rounded-[2rem] shadow-sm border border-transparent hover:border-primary/10 transition-all group overflow-hidden"
+      whileHover={{ y: -8 }}
+      className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 flex flex-col h-full relative"
     >
-      {/* Thumbnail */}
-      <div className="relative aspect-video rounded-[1.5rem] overflow-hidden mb-4 bg-gray-100">
+      {/* Image Container */}
+      <div className="relative aspect-video overflow-hidden">
         <img 
           src={course.image} 
           alt={course.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
-        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-primary uppercase">
-          {course.tag || 'New'}
+        <div className="absolute top-4 left-4 flex flex-col gap-2">
+          <span className="bg-primary/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
+            {course.level}
+          </span>
+          {course.isInternship && (
+            <span className="bg-emerald-500/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg flex items-center gap-1">
+              Internship 💰
+            </span>
+          )}
         </div>
       </div>
-      
-      <div className="space-y-4">
-        {/* Meta */}
-        <div className="flex items-center justify-between text-[11px] font-semibold text-gray-500">
-          <div className="flex items-center gap-1">
-            <BookOpen size={14} className="text-primary" />
-            <span>10 Lessons</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Users size={14} className="text-primary" />
-            <span>50+ Students</span>
-          </div>
+
+      {/* Content */}
+      <div className="p-6 flex flex-col flex-grow">
+        <div className="flex items-center gap-1 mb-3">
+          <Star className="text-amber-400 fill-amber-400" size={14} />
+          <span className="text-xs font-bold text-slate-700">{course.rating}</span>
+          <span className="text-[10px] text-slate-400 font-medium">({course.reviews})</span>
         </div>
 
-        <h3 className="text-lg font-bold text-gray-900 leading-tight line-clamp-2 min-h-[3rem]">
+        <h3 className="text-xl font-bold font-heading text-dark mb-4 group-hover:text-primary transition-colors line-clamp-2 leading-tight">
           {course.title}
         </h3>
 
-        <div className="pt-4 border-t border-gray-50 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200">
-              <img src={course.mentor.avatar} alt={course.mentor.name} className="w-full h-full object-cover" />
-            </div>
-            <span className="text-xs font-bold text-gray-600 truncate max-w-[80px]">{course.mentor.name}</span>
+        <div className="flex items-center gap-4 mb-6 text-slate-500 text-[11px] font-semibold uppercase tracking-wider">
+          <div className="flex items-center gap-1.5">
+            <Clock size={14} className="text-primary" />
+            <span>{course.duration}</span>
           </div>
-          <div className="flex flex-col items-end">
-            <span className="text-xl font-black text-primary">${course.price}</span>
+          <div className="flex items-center gap-1.5">
+            <BookOpen size={14} className="text-primary" />
+            <span>{course.lessons} Lessons</span>
           </div>
         </div>
-        
-        <Link to={`/course/${course.id}`} className="block">
-          <button className="w-full py-3 bg-gray-50 text-gray-900 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
-            Enroll Now
-          </button>
-        </Link>
+
+        {/* Mentor & Stipend Info */}
+        <div className="mt-auto">
+          {course.isInternship && (
+            <div className="mb-4 p-3 bg-emerald-50 rounded-xl flex items-center justify-between border border-emerald-100">
+              <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-tighter">Stipend during internship:</span>
+              <span className="text-sm font-extrabold text-emerald-800">{course.stipend}</span>
+            </div>
+          )}
+          
+          <div className="pt-4 border-t border-slate-50 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <img 
+                src={course.mentor.avatar} 
+                alt={course.mentor.name} 
+                className="w-7 h-7 rounded-full bg-slate-100"
+              />
+              <span className="text-[10px] font-bold text-slate-600 truncate max-w-[80px]">{course.mentor.name}</span>
+            </div>
+            <div className="text-right">
+              <div className="flex items-center gap-2">
+                <span className="text-lg font-extrabold text-primary">₹{course.price}</span>
+                <span className="text-xs text-slate-400 line-through">₹{course.originalPrice}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <Button variant="primary" className="w-full gap-2 rounded-xl text-sm">
+            View Details <ChevronRight size={16} />
+          </Button>
+        </div>
       </div>
     </motion.div>
   );

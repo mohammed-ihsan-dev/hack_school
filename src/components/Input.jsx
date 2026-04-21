@@ -1,25 +1,47 @@
 import React from 'react';
 
-const Input = ({ label, icon: Icon, error, ...props }) => {
+const Input = ({ 
+  label, 
+  icon: Icon, 
+  error, 
+  type = 'text', 
+  placeholder, 
+  className = '', 
+  ...props 
+}) => {
   return (
-    <div className="w-full space-y-1.5">
+    <div className={`flex flex-col gap-1.5 ${className}`}>
       {label && (
-        <label className="text-sm font-semibold text-slate-700 ml-1">
+        <label className="text-sm font-medium text-gray-700 ml-1">
           {label}
         </label>
       )}
       <div className="relative group">
         {Icon && (
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">
+          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-brand transition-colors">
             <Icon size={20} />
           </div>
         )}
         <input
-          className={`w-full ${Icon ? 'pl-12' : 'px-4'} pr-4 py-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-slate-400 ${error ? 'border-red-500 bg-red-50' : ''}`}
+          type={type}
+          placeholder={placeholder}
+          className={`
+            w-full py-3 rounded-xl border transition-all duration-300
+            ${Icon ? 'pl-12 pr-4' : 'px-4'}
+            ${error 
+              ? 'border-red-400 focus:ring-2 focus:ring-red-400/40 bg-red-50' 
+              : 'border-gray-200 focus:ring-2 focus:ring-primary/40 focus:border-primary bg-white focus:bg-white'
+            }
+            outline-none
+          `}
           {...props}
         />
       </div>
-      {error && <p className="text-xs text-red-500 ml-1 font-medium">{error}</p>}
+      {error && (
+        <span className="text-xs text-red-500 ml-1 mt-0.5">
+          {error}
+        </span>
+      )}
     </div>
   );
 };

@@ -1,36 +1,46 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FiLoader as Loader2 } from 'react-icons/fi';
 
 const Button = ({ 
   children, 
   variant = 'primary', 
-  onClick, 
+  size = 'md', 
+  loading = false, 
+  disabled = false, 
   className = '', 
-  type = 'button',
-  isLoading = false,
+  onClick,
   ...props 
 }) => {
-  const baseStyles = "px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed";
-  
   const variants = {
-    primary: "bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20",
-    outline: "border-2 border-primary text-primary hover:bg-primary hover:text-white",
-    secondary: "bg-secondary text-white hover:bg-secondary/90",
-    ghost: "text-gray-600 hover:bg-gray-100",
+    primary: 'bg-primary text-white hover:bg-secondary shadow-lg shadow-primary/20',
+    outline: 'border-2 border-primary text-primary hover:bg-primary/5',
+    ghost: 'text-primary hover:bg-primary/5',
+    dark: 'bg-white text-dark hover:bg-white/90',
   };
+
+  const sizes = {
+    sm: 'px-4 py-2 text-sm',
+    md: 'px-6 py-3 text-base',
+    lg: 'px-8 py-4 text-lg font-bold',
+  };
+
+  const baseStyles = 'inline-flex items-center justify-center rounded-xl font-bold font-heading transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed';
 
   return (
     <motion.button
-      whileTap={{ scale: 0.95 }}
-      type={type}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.97 }}
       onClick={onClick}
-      disabled={isLoading}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
+      disabled={disabled || loading}
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
-      {isLoading ? (
-        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-      ) : children}
+      {loading ? (
+        <Loader2 className="w-5 h-5 animate-spin" />
+      ) : (
+        children
+      )}
     </motion.button>
   );
 };
