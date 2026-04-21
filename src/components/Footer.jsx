@@ -30,15 +30,38 @@ const Footer = () => {
           <div className="space-y-8">
             <h4 className="text-sm font-black uppercase tracking-[0.2em] text-primary">Operatives</h4>
             <ul className="space-y-4">
-              {['Home', 'All Courses', 'About HackSchool', 'Success Stories', 'Partner with Us'].map((link) => (
-                <li key={link}>
-                  <Link to="/" className="text-slate-400 hover:text-white font-bold transition-all flex items-center gap-2 group">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                    {link}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link to="/" className="text-slate-400 hover:text-white font-bold transition-all flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/courses" className="text-slate-400 hover:text-white font-bold transition-all flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  All Courses
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-slate-400 hover:text-white font-bold transition-all flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  About HackSchool
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="text-slate-400 hover:text-white font-bold transition-all flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  Success Stories
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="text-slate-400 hover:text-white font-bold transition-all flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  Partner with Us
+                </Link>
+              </li>
             </ul>
+
           </div>
 
           <div className="space-y-8">

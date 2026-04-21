@@ -17,7 +17,13 @@ const About = () => {
   ];
 
   return (
-    <div className="pb-32">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="pb-32"
+    >
+
       {/* Hero */}
       <section className="bg-slate-900 pt-32 pb-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full bg-gradient-primary opacity-10 blur-[120px]" />
@@ -113,7 +119,7 @@ const About = () => {
           ))}
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

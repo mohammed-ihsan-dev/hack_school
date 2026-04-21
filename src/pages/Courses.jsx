@@ -6,7 +6,13 @@ import { Filter, Search } from 'lucide-react';
 
 const Courses = () => {
   return (
-    <div className="min-h-screen pb-20">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen pb-20"
+    >
+
       {/* Header */}
       <section className="bg-slate-900 pt-32 pb-20 text-center relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-primary opacity-10 blur-[120px]" />
@@ -81,7 +87,7 @@ const Courses = () => {
           <p className="text-slate-500">Try adjusting your filters or search term.</p>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
