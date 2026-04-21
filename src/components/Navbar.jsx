@@ -53,12 +53,13 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-4">
           <Link to="/login">
-            <Button variant="ghost" className="text-sm font-bold uppercase tracking-wider">Log In</Button>
+            <Button variant="outline" className="text-sm font-bold uppercase tracking-wider">Log In</Button>
           </Link>
           <Link to="/signup">
             <Button className="text-sm font-bold uppercase tracking-wider px-8">Get Started</Button>
           </Link>
         </div>
+
 
         {/* Mobile Toggle */}
         <motion.button 

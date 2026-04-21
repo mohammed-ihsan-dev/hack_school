@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+
 import { 
   CheckCircle2, 
   Calendar, 
@@ -15,6 +16,47 @@ import {
 } from 'lucide-react';
 import Button from '../components/Button';
 import { COURSES } from '../utils/mockData';
+
+const AccordionItem = ({ index, title }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  
+  return (
+    <div className="group border border-slate-100 rounded-[1.5rem] overflow-hidden transition-all bg-white hover:border-primary/20">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full p-6 flex items-center justify-between text-left focus:outline-none"
+      >
+        <div className="flex items-center gap-5">
+          <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-white group-hover:text-primary transition-all shadow-sm">
+            <span className="font-black text-lg">{index}</span>
+          </div>
+          <h4 className="font-black text-slate-800 text-lg">{title}</h4>
+        </div>
+        <ChevronRight size={24} className={`text-slate-300 transition-transform duration-300 ${isOpen ? 'rotate-90 text-primary' : ''}`} />
+      </button>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+          >
+            <div className="px-24 pb-8 text-slate-500 font-medium leading-relaxed">
+              <ul className="list-disc space-y-2">
+                <li>Hands-on execution with real budgets</li>
+                <li>Case studies from elite digital frameworks</li>
+                <li>Live Q&A with industry operatives</li>
+                <li>Downloadable resources & playbooks</li>
+              </ul>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -97,7 +139,7 @@ const CourseDetails = () => {
               </div>
             </section>
 
-            {/* Curriculum */}
+            {/* Curriculum (Accordion) */}
             <section className="space-y-8">
               <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-black text-slate-900">Curriculum</h2>
@@ -105,18 +147,11 @@ const CourseDetails = () => {
               </div>
               <div className="space-y-4">
                 {course.curriculum.map((module, i) => (
-                  <div key={i} className="group p-6 bg-white border border-slate-100 rounded-[1.5rem] flex items-center justify-between hover:border-primary/30 hover:bg-slate-50/50 transition-all cursor-default">
-                    <div className="flex items-center gap-5">
-                      <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-white group-hover:text-primary transition-all shadow-sm">
-                        <span className="font-black text-lg">{i + 1}</span>
-                      </div>
-                      <h4 className="font-black text-slate-800 text-lg">{module}</h4>
-                    </div>
-                    <ChevronRight size={20} className="text-slate-200 group-hover:translate-x-1 transition-transform" />
-                  </div>
+                  <AccordionItem key={i} index={i + 1} title={module} />
                 ))}
               </div>
             </section>
+
 
             {/* Internship Section */}
             <section className="bg-gradient-primary rounded-[2.5rem] p-10 lg:p-16 text-white relative overflow-hidden shadow-2xl">

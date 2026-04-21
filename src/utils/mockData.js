@@ -123,8 +123,9 @@ export const TESTIMONIALS = [
 ];
 
 export const STATS = [
-  { label: 'Students Trained', value: '5000+' },
-  { label: 'Cohorts Completed', value: '24' },
-  { label: 'Placement Rate', value: '95%' },
-  { label: 'Average Rating', value: '4.9★' },
+  { label: 'Students', value: '5000+' },
+  { label: 'Courses', value: '20+' },
+  { label: 'Placement', value: '95%' },
+  { label: 'Rating', value: '4.9' },
 ];
+

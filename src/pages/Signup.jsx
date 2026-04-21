@@ -99,6 +99,14 @@ const Signup = () => {
                 icon={Lock} 
                 required
               />
+              <Input 
+                label="Confirm Password" 
+                type="password" 
+                placeholder="Repeat your password" 
+                icon={Lock} 
+                required
+              />
+
             </div>
 
             <div className="flex items-start gap-3 px-1">
