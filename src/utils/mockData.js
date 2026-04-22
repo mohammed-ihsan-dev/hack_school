@@ -100,9 +100,9 @@ export const TESTIMONIALS = [
 ];
 
 export const STATS = [
-  { label: "Students Trained", value: "5,000+" },
+  { label: "Students Trained", value: "1,000+" },
   { label: "Placement Rate", value: "98%" },
-  { label: "Internship Success", value: "1,200+" },
+  { label: "Internship Success", value: "980+" },
   { label: "Avg. Stipend", value: "₹15K" }
 ];
 
