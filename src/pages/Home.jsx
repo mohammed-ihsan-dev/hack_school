@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import brandVideo from '../assets/Logo_BrandHackers.mp4';
 import {
   FiArrowRight as ArrowRight,
   FiTarget as Target,
@@ -21,32 +22,55 @@ const Home = () => {
   return (
     <div className="pb-24 overflow-hidden">
 
-      {/* 1. HERO SECTION */}
-      <section className="relative min-h-[90vh] flex items-center bg-white overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full rounded-l-[100px] -z-10 hidden lg:block" style={{ background: 'rgba(107,62,250,0.05)' }} />
-        <div className="absolute top-20 left-10 w-64 h-64 rounded-full blur-3xl -z-10 opacity-60" style={{ background: 'rgba(107,62,250,0.1)' }} />
+      {/* 1. HERO SECTION — split layout: left=content, right=video bg panel */}
+      <section className="relative w-full min-h-screen overflow-hidden bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
 
-        <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* ── LEFT PANEL: clean content ── */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.85, ease: 'easeOut' }}
+            className="relative z-10 flex flex-col justify-center px-8 md:px-14 lg:px-20 py-24 bg-white"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest mb-6" style={{ background: 'rgba(107,62,250,0.1)', color: '#6B3EFA' }}>
-              <Zap size={14} /> Next Cohort Starts Soon
+            {/* Subtle left-side purple glow blob */}
+            <div className="absolute top-24 -left-16 w-72 h-72 rounded-full blur-3xl pointer-events-none opacity-40"
+              style={{ background: 'rgba(107,62,250,0.12)' }} />
+
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest mb-8 w-fit"
+              style={{ background: 'rgba(107,62,250,0.1)', color: '#6B3EFA' }}>
+              <Zap size={13} /> Next Cohort Starts Soon
             </div>
-            <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6" style={{ fontFamily: 'Syne, sans-serif', color: '#0D0A1E' }}>
+
+            {/* Headline */}
+            <h1 className="text-5xl md:text-6xl xl:text-7xl font-extrabold leading-[1.08] mb-6 max-w-[580px]"
+              style={{ fontFamily: 'Syne, sans-serif', color: '#0D0A1E' }}>
               Launch Your <br />
-              <span style={{ background: 'linear-gradient(135deg, #6B3EFA 0%, #A78BFA 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <span style={{
+                background: 'linear-gradient(135deg, #6B3EFA 0%, #A78BFA 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>
                 Digital Marketing
               </span>{' '}Career
             </h1>
-            <p className="text-lg md:text-xl mb-10 max-w-lg font-medium" style={{ color: '#4B5563' }}>
-              Learn from industry experts, earn <span className="font-bold" style={{ color: '#0D0A1E' }}>₹15,000+ stipend</span>, and get job-ready with real experience.
+
+            {/* Subtext */}
+            <p className="text-lg md:text-xl mb-10 max-w-[480px] font-medium leading-relaxed"
+              style={{ color: '#4B5563' }}>
+              Learn from industry experts, earn{' '}
+              <span className="font-bold" style={{ color: '#0D0A1E' }}>₹15,000+ stipend</span>,
+              and get job-ready with real experience.
             </p>
+
+            {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/courses">
-                <button className="inline-flex items-center gap-2 px-10 py-4 rounded-2xl font-bold text-white transition-all" style={{ fontFamily: 'Syne, sans-serif', fontSize: 15, background: '#6B3EFA', boxShadow: '0 8px 24px rgba(107,62,250,0.3)' }}
+                <button
+                  className="inline-flex items-center gap-2 px-10 py-4 rounded-2xl font-bold text-white transition-all"
+                  style={{ fontFamily: 'Syne, sans-serif', fontSize: 15, background: '#6B3EFA', boxShadow: '0 8px 28px rgba(107,62,250,0.35)' }}
                   onMouseEnter={e => { e.currentTarget.style.background = '#4A1FD8'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = '#6B3EFA'; e.currentTarget.style.transform = 'translateY(0)'; }}
                 >
@@ -54,7 +78,9 @@ const Home = () => {
                 </button>
               </Link>
               <Link to="/signup">
-                <button className="inline-flex items-center gap-2 px-10 py-4 rounded-2xl font-bold transition-all" style={{ fontFamily: 'Syne, sans-serif', fontSize: 15, background: 'transparent', color: '#6B3EFA', border: '2px solid #EDE9FE' }}
+                <button
+                  className="inline-flex items-center gap-2 px-10 py-4 rounded-2xl font-bold transition-all"
+                  style={{ fontFamily: 'Syne, sans-serif', fontSize: 15, background: 'transparent', color: '#6B3EFA', border: '2px solid #EDE9FE' }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = '#6B3EFA'; e.currentTarget.style.background = 'rgba(107,62,250,0.05)'; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = '#EDE9FE'; e.currentTarget.style.background = 'transparent'; }}
                 >
@@ -64,20 +90,83 @@ const Home = () => {
             </div>
           </motion.div>
 
+          {/* ── RIGHT PANEL: video background ── */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="relative hidden lg:block"
+            transition={{ duration: 1.1, ease: 'easeOut' }}
+            className="relative hidden lg:flex items-stretch min-h-screen overflow-hidden"
           >
-            <div className="relative z-10 floating rounded-3xl overflow-hidden shadow-2xl" style={{ border: '8px solid #fff' }}>
-              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200" className="w-full" />
-            </div>
-            <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl z-20 flex items-center gap-4" style={{ border: '1px solid #EDE9FE' }}>
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-sm" style={{ background: 'rgba(107,62,250,0.1)', color: '#6B3EFA', fontFamily: 'Syne, sans-serif' }}>145%</div>
-              <div className="text-xs font-bold uppercase tracking-tighter" style={{ color: '#9CA3AF' }}>Avg. Salary Hike</div>
-            </div>
+            {/* Video fills the entire right panel */}
+            <video
+              src={brandVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ zIndex: 0 }}
+            />
+
+            {/* Gradient overlay: dark on right → fades to transparent on left, blending into white */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                zIndex: 1,
+                background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.15) 18%, rgba(15,23,42,0.35) 60%, rgba(15,23,42,0.72) 100%)',
+              }}
+            />
+
+            {/* Floating stat badge — bottom-left of video panel */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+              className="absolute bottom-10 left-8 z-10 bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-2xl flex items-center gap-4"
+              style={{ border: '1px solid #EDE9FE' }}
+            >
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-sm"
+                style={{ background: 'rgba(107,62,250,0.1)', color: '#6B3EFA', fontFamily: 'Syne, sans-serif' }}>
+                145%
+              </div>
+              <div>
+                <div className="text-sm font-extrabold" style={{ color: '#0D0A1E', fontFamily: 'Syne, sans-serif' }}>Avg. Salary Hike</div>
+                <div className="text-xs font-medium" style={{ color: '#9CA3AF' }}>Among our graduates</div>
+              </div>
+            </motion.div>
+
+            {/* Second floating badge — top-right */}
+            <motion.div
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.6 }}
+              className="absolute top-12 right-8 z-10 bg-white/90 backdrop-blur-sm px-5 py-3 rounded-xl shadow-xl flex items-center gap-3"
+              style={{ border: '1px solid #EDE9FE' }}
+            >
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+                style={{ background: '#6B3EFA' }}>
+                <Users size={15} color="#fff" />
+              </div>
+              <div>
+                <div className="text-xs font-extrabold" style={{ color: '#0D0A1E', fontFamily: 'Syne, sans-serif' }}>5,000+ Students</div>
+                <div className="text-xs" style={{ color: '#9CA3AF' }}>Placed & earning</div>
+              </div>
+            </motion.div>
           </motion.div>
+
+          {/* Mobile-only: video below text */}
+          <div className="relative lg:hidden h-[320px] overflow-hidden">
+            <video
+              src={brandVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, transparent 40%)' }} />
+          </div>
+
         </div>
       </section>
 
