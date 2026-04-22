@@ -40,7 +40,7 @@ const Home = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest mb-8 w-fit"
               style={{ background: 'rgba(107,62,250,0.1)', color: '#6B3EFA' }}>
-              <Zap size={13} /> Next Cohort Starts Soon
+              <Zap size={13} /> Next Batch Starts Soon
             </div>
 
             {/* Headline */}
@@ -116,42 +116,6 @@ const Home = () => {
                 background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.15) 18%, rgba(15,23,42,0.35) 60%, rgba(15,23,42,0.72) 100%)',
               }}
             />
-
-            {/* Floating stat badge — bottom-left of video panel */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              className="absolute bottom-10 left-8 z-10 bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-2xl flex items-center gap-4"
-              style={{ border: '1px solid #EDE9FE' }}
-            >
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-sm"
-                style={{ background: 'rgba(107,62,250,0.1)', color: '#6B3EFA', fontFamily: 'Syne, sans-serif' }}>
-                145%
-              </div>
-              <div>
-                <div className="text-sm font-extrabold" style={{ color: '#0D0A1E', fontFamily: 'Syne, sans-serif' }}>Avg. Salary Hike</div>
-                <div className="text-xs font-medium" style={{ color: '#9CA3AF' }}>Among our graduates</div>
-              </div>
-            </motion.div>
-
-            {/* Second floating badge — top-right */}
-            <motion.div
-              initial={{ opacity: 0, y: -16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-              className="absolute top-12 right-8 z-10 bg-white/90 backdrop-blur-sm px-5 py-3 rounded-xl shadow-xl flex items-center gap-3"
-              style={{ border: '1px solid #EDE9FE' }}
-            >
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-                style={{ background: '#6B3EFA' }}>
-                <Users size={15} color="#fff" />
-              </div>
-              <div>
-                <div className="text-xs font-extrabold" style={{ color: '#0D0A1E', fontFamily: 'Syne, sans-serif' }}>5,000+ Students</div>
-                <div className="text-xs" style={{ color: '#9CA3AF' }}>Placed & earning</div>
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Mobile-only: video below text */}
@@ -255,7 +219,7 @@ const Home = () => {
             <div className="absolute rounded-full blur-3xl pointer-events-none" style={{ width: 500, height: 500, background: 'rgba(107,62,250,0.2)', top: -200, left: '50%', transform: 'translateX(-50%)' }} />
             <div className="relative z-10">
               <h2 className="text-4xl md:text-6xl font-extrabold mb-8" style={{ fontFamily: 'Syne, sans-serif' }}>Start Your Career Today</h2>
-              <p className="text-xl mb-12 max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.6)' }}>Join 5000+ students and start earning while learning from day one.</p>
+              <p className="text-xl mb-12 max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.6)' }}>Join 1000+ students and start earning while learning from day one.</p>
               <Link to="/signup">
                 <button className="px-12 h-16 text-xl rounded-2xl font-bold text-white transition-all" style={{ fontFamily: 'Syne, sans-serif', background: '#6B3EFA', boxShadow: '0 12px 40px rgba(107,62,250,0.5)' }}
                   onMouseEnter={e => { e.currentTarget.style.background = '#4A1FD8'; e.currentTarget.style.transform = 'translateY(-2px)'; }}

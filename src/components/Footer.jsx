@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaTwitter, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaBehance } from 'react-icons/fa';
 import Logo from './Logo';
 
 const Footer = () => {
@@ -22,14 +22,16 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               {[
-                { icon: <FaTwitter />, link: "#" },
-                { icon: <FaInstagram />, link: "#" },
-                { icon: <FaLinkedinIn />, link: "#" },
-                { icon: <FaGithub />, link: "#" }
+                { icon: <FaFacebookF />, link: "https://www.facebook.com/brandhackers/" },
+                { icon: <FaInstagram />, link: "https://www.instagram.com/hackschool.io/" },
+                { icon: <FaLinkedinIn />, link: "https://www.linkedin.com/company/brandhackers-digitalconsultants/?originalSubdomain=in" },
+                { icon: <FaBehance />, link: "https://www.behance.net/brandhackers?tracking_source=search_users" }
               ].map((social, i) => (
                 <a 
                   key={i} 
                   href={social.link} 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all duration-300 border border-white/10"
                 >
                   {social.icon}
@@ -45,29 +47,28 @@ const Footer = () => {
               <li><Link to="/" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Home</Link></li>
               <li><Link to="/courses" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Courses</Link></li>
               <li><Link to="/about" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Our Story</Link></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Success Wall</a></li>
+              <li><Link to="/help" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Help Centre</Link></li>
             </ul>
           </div>
 
-          {/* Company */}
           <div className="lg:ml-12">
             <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-8">Support</h4>
             <ul className="space-y-4">
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Help Center</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Privacy Policy</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Terms of Use</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Contact Us</a></li>
+              <li><Link to="/faq" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">FAQs</Link></li>
+              <li><Link to="/privacy" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Terms of Use</Link></li>
+              <li><Link to="/contact" className="text-slate-400 hover:text-white transition-colors text-sm font-medium">Contact Us</Link></li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-8">Newsletter</h4>
-            <p className="text-xs text-slate-400 mb-6 font-medium leading-relaxed">Join 5,000+ subscribers for the latest marketing tips & cohort updates.</p>
+            <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-8">Info</h4>
+            <p className="text-xs text-slate-400 mb-6 font-medium leading-relaxed">Join 1,500+ subscribers for the latest marketing tips & Batch updates.</p>
             <div className="flex flex-col gap-3">
               <input 
                 type="email" 
-                placeholder="you@example.com"
+                placeholder="Enter Your email.."
                 className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/50 transition-colors w-full"
               />
               <button className="bg-primary hover:bg-secondary py-3 rounded-xl text-sm font-bold transition-all shadow-lg shadow-primary/20">
