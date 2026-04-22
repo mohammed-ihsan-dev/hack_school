@@ -37,7 +37,6 @@ const Navbar = () => {
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
           <div style={{
             padding: 6,
-            background: 'rgba(107,62,250,0.08)',
             borderRadius: 12,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             transition: 'transform 0.3s ease',
@@ -45,7 +44,7 @@ const Navbar = () => {
             onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
             onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
           >
-            <Logo className="w-9 h-9" />
+            <Logo className="w-14 h-14" />
           </div>
           <span style={{
             fontSize: 22,
