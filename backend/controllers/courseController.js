@@ -5,7 +5,24 @@ import Course from '../models/Course.js';
 // @access  Public
 const getCourses = async (req, res, next) => {
   try {
-    const courses = await Course.find({});
+    const keyword = req.query.search
+      ? {
+          $or: [
+            { title: { $regex: req.query.search, $options: 'i' } },
+            { description: { $regex: req.query.search, $options: 'i' } },
+          ],
+        }
+      : {};
+
+    const category = req.query.category && req.query.category !== 'All'
+      ? { category: req.query.category }
+      : {};
+
+    const level = req.query.level && req.query.level !== 'All'
+      ? { level: req.query.level }
+      : {};
+
+    const courses = await Course.find({ ...keyword, ...category, ...level });
     res.json(courses);
   } catch (error) {
     next(error);

@@ -1,23 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { FiSearch as Search, FiSliders as SlidersHorizontal } from 'react-icons/fi';
+import { FiSearch as Search } from 'react-icons/fi';
 import { LuPackageOpen as PackageOpen } from 'react-icons/lu';
 import { motion, AnimatePresence } from 'framer-motion';
 import CourseCard from '../components/CourseCard';
 import API from '../services/api';
+import { useSearchParams } from 'react-router-dom';
+import useDebounce from '../hooks/useDebounce';
 
 const Levels = ['All', 'Beginner', 'Intermediate', 'Advanced'];
 
 const Courses = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedLevel, setSelectedLevel] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
+
+  // Sync state with URL params
+  const selectedLevel = searchParams.get('level') || 'All';
+  const searchQuery = searchParams.get('search') || '';
+  const debouncedSearch = useDebounce(searchQuery, 300);
 
   useEffect(() => {
     const fetchCourses = async () => {
+      setLoading(true);
       try {
-        const { data } = await API.get('/courses');
+        const queryParams = new URLSearchParams();
+        if (selectedLevel !== 'All') queryParams.append('level', selectedLevel);
+        if (debouncedSearch) queryParams.append('search', debouncedSearch);
+
+        const { data } = await API.get(`/courses?${queryParams.toString()}`);
         setCourses(data);
       } catch (err) {
         console.error('Error fetching courses:', err);
@@ -28,13 +39,17 @@ const Courses = () => {
     };
 
     fetchCourses();
-  }, []);
+  }, [selectedLevel, debouncedSearch]);
 
-  const filteredCourses = courses.filter(course => {
-    const matchesLevel = selectedLevel === 'All' || course.level === selectedLevel;
-    const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesLevel && matchesSearch;
-  });
+  const updateFilters = (key, value) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (value && value !== 'All') {
+      newParams.set(key, value);
+    } else {
+      newParams.delete(key);
+    }
+    setSearchParams(newParams);
+  };
 
   return (
     <div className="pt-24 pb-20">
@@ -62,7 +77,7 @@ const Courses = () => {
               {Levels.map(lvl => (
                 <button
                   key={lvl}
-                  onClick={() => setSelectedLevel(lvl)}
+                  onClick={() => updateFilters('level', lvl)}
                   className={`
                     px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap
                     ${selectedLevel === lvl 
@@ -80,9 +95,9 @@ const Courses = () => {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
               <input 
                 type="text" 
-                placeholder="Find your bootcamp..."
+                placeholder="Find your Cources..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => updateFilters('search', e.target.value)}
                 className="w-full pl-11 pr-4 py-3.5 bg-slate-50 rounded-2xl text-sm border-transparent focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all outline-none font-medium"
               />
             </div>
@@ -107,7 +122,7 @@ const Courses = () => {
 
         {!loading && !error && (
           <AnimatePresence mode='wait'>
-            {filteredCourses.length > 0 ? (
+            {courses.length > 0 ? (
               <motion.div 
                 key="grid"
                 initial={{ opacity: 0, y: 20 }}
@@ -115,7 +130,7 @@ const Courses = () => {
                 exit={{ opacity: 0, y: -20 }}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
               >
-                {filteredCourses.map(course => (
+                {courses.map(course => (
                   <CourseCard key={course._id || course.id} course={course} />
                 ))}
               </motion.div>
@@ -132,7 +147,7 @@ const Courses = () => {
               <h3 className="text-2xl font-bold text-dark mb-2 font-heading">No such program yet</h3>
               <p className="text-slate-500 font-inter max-w-xs mx-auto">Try adjusting your filters or search terms for better results.</p>
               <button 
-                onClick={() => {setSelectedLevel('All'); setSearchQuery('');}}
+                onClick={() => setSearchParams({})}
                 className="mt-8 text-primary font-bold hover:underline underline-offset-4"
               >
                 Clear all filters

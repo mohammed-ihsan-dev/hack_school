@@ -267,20 +267,29 @@ const Home = () => {
       {/* 2. FEATURES */}
       <section className="py-24" style={{ background: '#F5F3FF' }}>
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, idx) => (
-            <motion.div key={feature._id || idx} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}
-              className="bg-white p-8 rounded-3xl shadow-sm transition-all"
-              style={{ border: '1px solid #EDE9FE' }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 20px 60px rgba(107,62,250,0.1)'; e.currentTarget.style.borderColor = '#6B3EFA'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = ''; e.currentTarget.style.borderColor = '#EDE9FE'; e.currentTarget.style.transform = 'translateY(0)'; }}
-            >
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style={{ background: 'rgba(107,62,250,0.1)', color: '#6B3EFA' }}>
-                {idx === 0 ? <Zap /> : idx === 1 ? <Briefcase /> : idx === 2 ? <Target /> : <Users />}
-              </div>
-              <h3 className="text-xl font-bold mb-3" style={{ fontFamily: 'Syne, sans-serif', color: '#0D0A1E' }}>{feature.title}</h3>
-              <p className="text-sm" style={{ color: '#6B7280' }}>{feature.description}</p>
-            </motion.div>
-          ))}
+          {features.map((feature, idx) => {
+            const IconComponent = {
+              zap: Zap,
+              briefcase: Briefcase,
+              target: Target,
+              users: Users
+            }[feature.icon?.toLowerCase()] || Zap;
+
+            return (
+              <motion.div key={feature._id || idx} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}
+                className="bg-white p-8 rounded-3xl shadow-sm transition-all"
+                style={{ border: '1px solid #EDE9FE' }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 20px 60px rgba(107,62,250,0.1)'; e.currentTarget.style.borderColor = '#6B3EFA'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = ''; e.currentTarget.style.borderColor = '#EDE9FE'; e.currentTarget.style.transform = 'translateY(0)'; }}
+              >
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style={{ background: 'rgba(107,62,250,0.1)', color: '#6B3EFA' }}>
+                  <IconComponent size={28} />
+                </div>
+                <h3 className="text-xl font-bold mb-3" style={{ fontFamily: 'Syne, sans-serif', color: '#0D0A1E' }}>{feature.title}</h3>
+                <p className="text-sm" style={{ color: '#6B7280' }}>{feature.description}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 

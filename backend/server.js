@@ -8,6 +8,7 @@ import authRoutes from './routes/authRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import testimonialRoutes from './routes/testimonialRoutes.js';
+import featureRoutes from './routes/featureRoutes.js';
 
 // Load env vars
 dotenv.config();
@@ -32,6 +33,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/features', featureRoutes);
 
 // Custom Error Handling Middleware
 app.use(notFound);

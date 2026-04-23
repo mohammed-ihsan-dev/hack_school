@@ -7,19 +7,27 @@ import Logo from '../components/Logo';
 import Button from '../components/Button';
 import Input from '../components/Input';
 
+import { useAuth } from '../context/AuthContext';
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    try {
+      await login(email, password);
+      navigate('/');
+    } catch (err) {
+      // Error is handled by AuthContext toast
+    } finally {
       setLoading(false);
-      toast.success('Welcome back to HackSchool!');
-      setTimeout(() => navigate('/'), 1000);
-    }, 1500);
+    }
   };
 
   return (
@@ -53,6 +61,8 @@ const Login = () => {
               placeholder="name@example.com"
               type="email"
               icon={Mail}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             
@@ -62,6 +72,8 @@ const Login = () => {
                 placeholder="••••••••"
                 type={showPassword ? 'text' : 'password'}
                 icon={Lock}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
               <button 

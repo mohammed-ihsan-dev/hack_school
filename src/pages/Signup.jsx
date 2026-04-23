@@ -7,19 +7,32 @@ import Logo from '../components/Logo';
 import Button from '../components/Button';
 import Input from '../components/Input';
 
+import { useAuth } from '../context/AuthContext';
+
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const { signup } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      return toast.error('Passwords do not match');
+    }
     setLoading(true);
-    setTimeout(() => {
+    try {
+      await signup(name, email, password);
+      navigate('/');
+    } catch (err) {
+      // Error handled by AuthContext
+    } finally {
       setLoading(false);
-      toast.success('Account created! Welcome to HackSchool.');
-      setTimeout(() => navigate('/'), 1000);
-    }, 1500);
+    }
   };
 
   return (
@@ -43,7 +56,7 @@ const Signup = () => {
         <div className="text-center mb-10">
           <Logo className="w-16 h-16 mx-auto mb-6" />
           <h1 className="text-3xl font-extrabold font-heading text-dark mb-2">Create Account</h1>
-          <p className="text-slate-500 font-medium font-inter">Join 5000+ students on their path to a tech career.</p>
+          <p className="text-slate-500 font-medium font-inter">Join 1000+ students on their path to a tech career.</p>
         </div>
 
         <div className="glass-card p-8 md:p-12 border-white/40">
@@ -53,6 +66,8 @@ const Signup = () => {
                 label="Full Name"
                 placeholder="John Doe"
                 icon={User}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
               <Input 
@@ -60,6 +75,8 @@ const Signup = () => {
                 placeholder="name@example.com"
                 type="email"
                 icon={Mail}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -71,6 +88,8 @@ const Signup = () => {
                   placeholder="••••••••"
                   type={showPassword ? 'text' : 'password'}
                   icon={Lock}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
@@ -80,6 +99,8 @@ const Signup = () => {
                   placeholder="••••••••"
                   type={showPassword ? 'text' : 'password'}
                   icon={Lock}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                 />
               </div>

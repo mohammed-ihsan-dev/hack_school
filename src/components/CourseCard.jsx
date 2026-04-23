@@ -70,7 +70,7 @@ const CourseCard = ({ course }) => {
           <div className="pt-5 border-t border-slate-100 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img 
-                src={course.mentor?.avatar || 'https://i.pravatar.cc/150'} 
+                src={course.mentor?.image || course.mentor?.avatar || 'https://i.pravatar.cc/150'} 
                 alt={course.mentor?.name || 'Instructor'} 
                 className="w-11 h-11 rounded-full bg-slate-100 object-cover border-2 border-white shadow-sm"
               />
