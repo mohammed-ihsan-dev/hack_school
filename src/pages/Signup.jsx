@@ -103,14 +103,10 @@ const Signup = () => {
             <div className="h-px flex-grow bg-slate-100" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <button className="flex items-center justify-center gap-3 py-4 bg-white border border-slate-100 rounded-2xl font-bold text-dark hover:bg-slate-50 transition-all shadow-sm">
+          <div className="space-y-4">
+            <button className="w-full flex items-center justify-center gap-3 py-4 bg-white border border-slate-100 rounded-2xl font-bold text-dark hover:bg-slate-50 transition-all shadow-sm">
               <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-5 h-5" alt="Google" />
-              Google
-            </button>
-            <button className="flex items-center justify-center gap-3 py-4 bg-white border border-slate-100 rounded-2xl font-bold text-dark hover:bg-slate-50 transition-all shadow-sm">
-              <img src="https://www.svgrepo.com/show/448234/linkedin.svg" className="w-5 h-5" alt="LinkedIn" />
-              LinkedIn
+              Sign up with Google
             </button>
           </div>
         </div>

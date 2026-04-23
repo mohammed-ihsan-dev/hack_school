@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import CourseCard from '../components/CourseCard';
 import API from '../services/api';
 
-const Levels = ['All', 'Beginner', 'Advanced'];
+const Levels = ['All', 'Beginner', 'Intermediate', 'Advanced'];
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);

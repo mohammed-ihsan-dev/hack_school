@@ -11,6 +11,7 @@ import Terms from '../pages/Terms';
 import Contact from '../pages/Contact';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
+import CourseDetail from '../pages/CourseDetail';
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
       {/* Pages with MainLayout */}
       <Route path="/" element={<MainLayout><Home /></MainLayout>} />
       <Route path="/courses" element={<MainLayout><Courses /></MainLayout>} />
+      <Route path="/courses/:id" element={<MainLayout><CourseDetail /></MainLayout>} />
       <Route path="/about" element={<MainLayout><About /></MainLayout>} />
       <Route path="/faq" element={<MainLayout><FAQ /></MainLayout>} />
       <Route path="/help" element={<MainLayout><HelpCentre /></MainLayout>} />

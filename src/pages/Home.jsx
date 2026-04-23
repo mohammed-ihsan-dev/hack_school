@@ -7,16 +7,77 @@ import Button from '../components/Button';
 import CourseCard from '../components/CourseCard';
 import { Link } from 'react-router-dom';
 
+const defaultTestimonials = [
+  {
+    name: "Aman Verma",
+    role: "Digital Marketer at Swiggy",
+    company: "Swiggy",
+    quote: "The practical projects and the ₹15k stipend during my internship were game-changers. I got placed at Swiggy even before finishing the course!",
+    avatar: "https://i.pravatar.cc/150?u=aman",
+    companyLogo: "https://www.vectorlogo.zone/logos/swiggy/swiggy-icon.svg",
+    rating: 5
+  },
+  {
+    name: "Riya Sharma",
+    role: "SEO Specialist at Zomato",
+    company: "Zomato",
+    quote: "HackSchool's mentors are true industry leaders. The depth of the SEO course is unmatched, and the placement cell is incredibly active.",
+    avatar: "https://i.pravatar.cc/150?u=riya",
+    companyLogo: "https://www.vectorlogo.zone/logos/zomato/zomato-tile.svg",
+    rating: 5
+  },
+  {
+    name: "Karan Johar",
+    role: "Performance Lead at Nykaa",
+    company: "Nykaa",
+    quote: "I was managing 7-figure ad spends within weeks of joining. The hands-on training here is exactly what the industry demands right now.",
+    avatar: "https://i.pravatar.cc/150?u=karan",
+    companyLogo: "https://www.vectorlogo.zone/logos/nykaa/nykaa-icon.svg",
+    rating: 5
+  },
+  {
+    name: "Sneha Patel",
+    role: "Content Strategist at Razorpay",
+    company: "Razorpay",
+    quote: "The outcome-based curriculum transition from learning to earning was seamless. Highly recommended for anyone serious about digital marketing.",
+    avatar: "https://i.pravatar.cc/150?u=sneha",
+    companyLogo: "https://www.vectorlogo.zone/logos/razorpay/razorpay-icon.svg",
+    rating: 5
+  }
+];
+
+const defaultFeatures = [
+  {
+    title: "Live Case Studies",
+    description: "Work on actual brand campaigns with real budgets. No dummy data, just real challenges.",
+    icon: "zap"
+  },
+  {
+    title: "Mentor Sessions",
+    description: "1-on-1 calls with heads of marketing from top unicorn startups in India.",
+    icon: "briefcase"
+  },
+  {
+    title: "Stipend Program",
+    description: "Top performers get a guaranteed ₹15,000/month stipend during their internship.",
+    icon: "target"
+  },
+  {
+    title: "Industry Networking",
+    description: "Get exclusive access to our network of 500+ hiring partners and industry leaders.",
+    icon: "users"
+  }
+];
+
 const Home = () => {
   const [courses, setCourses] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
-  const [features, setFeatures] = useState([]);
+  const [features, setFeatures] = useState(defaultFeatures);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch independently so one failure (like 404 on features) doesn't break everything
         const coursesRes = await API.get('/courses').catch(err => {
           console.warn("Courses endpoint not ready:", err);
           return { data: [] };
@@ -27,7 +88,7 @@ const Home = () => {
           console.warn("Testimonials endpoint not ready:", err);
           return { data: [] };
         });
-        if (testimonialsRes.data.length > 0) setTestimonials(testimonialsRes.data);
+        setTestimonials(testimonialsRes.data.length > 0 ? testimonialsRes.data : defaultTestimonials);
 
         const featuresRes = await API.get('/features').catch(err => {
           console.warn("Features endpoint not ready:", err);
@@ -48,6 +109,8 @@ const Home = () => {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
+
+  const displayTestimonials = (testimonials.length > 0 ? [...testimonials, ...testimonials] : defaultTestimonials);
 
   return (
     <div className="pb-24 overflow-hidden">
@@ -315,73 +378,7 @@ const Home = () => {
 
           <div className="testimonial-wrapper mt-10">
             <div className="testimonial-track">
-              {[
-                {
-                  name: "Aman Verma",
-                  role: "Digital Marketer at Swiggy",
-                  quote: "The practical projects and the ₹15k stipend during my internship were game-changers. I got placed at Swiggy even before finishing the course!",
-                  avatar: "https://i.pravatar.cc/150?u=aman",
-                  companyLogo: "https://www.vectorlogo.zone/logos/swiggy/swiggy-icon.svg",
-                  rating: 5
-                },
-                {
-                  name: "Riya Sharma",
-                  role: "SEO Specialist at Zomato",
-                  quote: "HackSchool's mentors are true industry leaders. The depth of the SEO course is unmatched, and the placement cell is incredibly active.",
-                  avatar: "https://i.pravatar.cc/150?u=riya",
-                  companyLogo: "https://www.vectorlogo.zone/logos/zomato/zomato-tile.svg",
-                  rating: 5
-                },
-                {
-                  name: "Karan Johar",
-                  role: "Performance Lead at Nykaa",
-                  quote: "I was managing 7-figure ad spends within weeks of joining. The hands-on training here is exactly what the industry demands right now.",
-                  avatar: "https://i.pravatar.cc/150?u=karan",
-                  companyLogo: "https://www.vectorlogo.zone/logos/nykaa/nykaa-icon.svg",
-                  rating: 5
-                },
-                {
-                  name: "Sneha Patel",
-                  role: "Content Strategist at Razorpay",
-                  quote: "The outcome-based curriculum transition from learning to earning was seamless. Highly recommended for anyone serious about digital marketing.",
-                  avatar: "https://i.pravatar.cc/150?u=sneha",
-                  companyLogo: "https://www.vectorlogo.zone/logos/razorpay/razorpay-icon.svg",
-                  rating: 5
-                },
-                // Duplicated for infinite scroll
-                {
-                  name: "Aman Verma",
-                  role: "Digital Marketer at Swiggy",
-                  quote: "The practical projects and the ₹15k stipend during my internship were game-changers. I got placed at Swiggy even before finishing the course!",
-                  avatar: "https://i.pravatar.cc/150?u=aman",
-                  companyLogo: "https://www.vectorlogo.zone/logos/swiggy/swiggy-icon.svg",
-                  rating: 5
-                },
-                {
-                  name: "Riya Sharma",
-                  role: "SEO Specialist at Zomato",
-                  quote: "HackSchool's mentors are true industry leaders. The depth of the SEO course is unmatched, and the placement cell is incredibly active.",
-                  avatar: "https://i.pravatar.cc/150?u=riya",
-                  companyLogo: "https://www.vectorlogo.zone/logos/zomato/zomato-tile.svg",
-                  rating: 5
-                },
-                {
-                  name: "Karan Johar",
-                  role: "Performance Lead at Nykaa",
-                  quote: "I was managing 7-figure ad spends within weeks of joining. The hands-on training here is exactly what the industry demands right now.",
-                  avatar: "https://i.pravatar.cc/150?u=karan",
-                  companyLogo: "https://www.vectorlogo.zone/logos/nykaa/nykaa-icon.svg",
-                  rating: 5
-                },
-                {
-                  name: "Sneha Patel",
-                  role: "Content Strategist at Razorpay",
-                  quote: "The outcome-based curriculum transition from learning to earning was seamless. Highly recommended for anyone serious about digital marketing.",
-                  avatar: "https://i.pravatar.cc/150?u=sneha",
-                  companyLogo: "https://www.vectorlogo.zone/logos/razorpay/razorpay-icon.svg",
-                  rating: 5
-                }
-              ].map((t, idx) => (
+              {displayTestimonials.map((t, idx) => (
                 <div 
                   key={idx}
                   className="testimonial-card-scroller group relative p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:border-primary/20 transition-all duration-500"
@@ -391,7 +388,7 @@ const Home = () => {
                   </div>
                   
                   <div className="flex items-center gap-2 mb-8">
-                    {[...Array(t.rating)].map((_, i) => (
+                    {[...Array(Math.floor(Math.max(0, Math.min(5, Number(t.rating) || 5))))].map((_, i) => (
                       <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
                     ))}
                   </div>
@@ -408,7 +405,21 @@ const Home = () => {
                         <p className="text-xs font-bold text-primary uppercase tracking-wider">{t.role}</p>
                       </div>
                     </div>
-                    <img src={t.companyLogo} className="h-8 w-auto grayscale group-hover:grayscale-0 transition-all opacity-40 group-hover:opacity-100" alt="Company" />
+                    <div className="h-8 flex items-center">
+                      {t.companyLogo ? (
+                        <img 
+                          src={t.companyLogo} 
+                          className="h-full w-auto grayscale group-hover:grayscale-0 transition-all opacity-40 group-hover:opacity-100" 
+                          alt={t.company || "Company"} 
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.parentNode.innerHTML = `<span class="text-xs font-black text-slate-300 uppercase tracking-widest">${t.company || 'Company'}</span>`;
+                          }}
+                        />
+                      ) : (
+                        <span className="text-xs font-black text-slate-300 uppercase tracking-widest">{t.company || 'Company'}</span>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

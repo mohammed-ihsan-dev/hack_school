@@ -1,13 +1,20 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiStar as Star, FiClock as Clock, FiBookOpen as BookOpen, FiChevronRight as ChevronRight, FiZap } from 'react-icons/fi';
 import Button from './Button';
 
 const CourseCard = ({ course }) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(`/courses/${course._id || course.id}`);
+  };
+
   return (
     <motion.div
       whileHover={{ y: -8 }}
-      className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 flex flex-col h-full relative"
+      onClick={handleNavigate}
+      className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 flex flex-col h-full relative cursor-pointer"
     >
       {/* Image Container */}
       <div className="relative aspect-video overflow-hidden">
@@ -85,7 +92,14 @@ const CourseCard = ({ course }) => {
         </div>
 
         <div className="mt-6">
-          <Button variant="primary" className="w-full gap-2 rounded-xl text-sm">
+          <Button 
+            variant="primary" 
+            className="w-full gap-2 rounded-xl text-sm"
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent duplicate calls if clicking the button
+              handleNavigate();
+            }}
+          >
             View Details <ChevronRight size={16} />
           </Button>
         </div>
