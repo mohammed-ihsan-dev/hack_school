@@ -1,17 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiSearch as Search, FiSliders as SlidersHorizontal } from 'react-icons/fi';
 import { LuPackageOpen as PackageOpen } from 'react-icons/lu';
 import { motion, AnimatePresence } from 'framer-motion';
 import CourseCard from '../components/CourseCard';
-import { COURSES } from '../utils/mockData';
+import API from '../services/api';
 
 const Levels = ['All', 'Beginner', 'Advanced'];
 
 const Courses = () => {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredCourses = COURSES.filter(course => {
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const { data } = await API.get('/courses');
+        setCourses(data);
+      } catch (err) {
+        console.error('Error fetching courses:', err);
+        setError('Failed to load courses. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  const filteredCourses = courses.filter(course => {
     const matchesLevel = selectedLevel === 'All' || course.level === selectedLevel;
     const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesLevel && matchesSearch;
@@ -73,20 +92,34 @@ const Courses = () => {
 
       {/* COURSE GRID */}
       <section className="container mx-auto px-6">
-        <AnimatePresence mode='wait'>
-          {filteredCourses.length > 0 ? (
-            <motion.div 
-              key="grid"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
-            >
-              {filteredCourses.map(course => (
-                <CourseCard key={course.id} course={course} />
-              ))}
-            </motion.div>
-          ) : (
+        {loading && (
+          <div className="flex justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+          </div>
+        )}
+
+        {error && (
+          <div className="text-center py-20">
+            <p className="text-red-500 font-bold">{error}</p>
+            <button onClick={() => window.location.reload()} className="mt-4 text-primary underline">Try again</button>
+          </div>
+        )}
+
+        {!loading && !error && (
+          <AnimatePresence mode='wait'>
+            {filteredCourses.length > 0 ? (
+              <motion.div 
+                key="grid"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+              >
+                {filteredCourses.map(course => (
+                  <CourseCard key={course._id || course.id} course={course} />
+                ))}
+              </motion.div>
+            ) : (
             <motion.div 
               key="empty"
               initial={{ opacity: 0 }}
@@ -107,6 +140,7 @@ const Courses = () => {
             </motion.div>
           )}
         </AnimatePresence>
+        )}
       </section>
     </div>
   );

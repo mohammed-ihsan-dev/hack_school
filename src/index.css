@@ -100,6 +100,73 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+/* Testimonial Infinite Scroll */
+.testimonial-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  padding: 40px 0;
+}
+
+.testimonial-track {
+  display: flex;
+  width: max-content;
+  animation: scrollLeft 60s linear infinite;
+}
+
+.testimonial-track:hover {
+  animation-play-state: paused;
+}
+
+.testimonial-card-scroller {
+  min-width: 450px;
+  max-width: 450px;
+  margin-right: 32px;
+  flex-shrink: 0;
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Gradient Fades for Edges */
+.testimonial-wrapper::before,
+.testimonial-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.testimonial-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, white, transparent);
+}
+
+.testimonial-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, white, transparent);
+}
+
+/* Logo Marquee */
+.logo-track {
+  display: flex;
+  width: max-content;
+  animation: scrollLeft 30s linear infinite;
+}
+
+.logo-track:hover {
+  animation-play-state: paused;
+}
+
 ::selection {
   background: rgba(107, 62, 250, 0.2);
   color: var(--color-primary);

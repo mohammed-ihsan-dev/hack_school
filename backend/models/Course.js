@@ -1,65 +1,45 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const courseSchema = new mongoose.Schema(
+const mentorSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true,
-    },
-    category: {
-      type: String,
-      required: true,
-    },
-    level: {
-      type: String,
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    originalPrice: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    duration: {
-      type: String,
-      required: true,
-    },
-    lessons: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    rating: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    isInternship: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    stipend: {
-      type: String,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: true,
-    },
+    name: String,
+    role: String,
+    company: String,
+    avatar: String,
   },
-  {
-    timestamps: true,
-  }
+  { _id: false } 
 );
 
-const Course = mongoose.model('Course', courseSchema);
+const courseSchema = new mongoose.Schema({
+  title: String,
+  slug: String,
+  description: String,
+  category: String,
+  level: String,
+  duration: String,
+  lessons: Number,
+  rating: Number,
+
+  isInternship: Boolean,
+  stipend: String,
+
+  image: String,
+
+  mentor: {
+    name: String,
+    role: String,
+    image: String
+  },
+
+  highlights: [String],
+  skills: [String],
+
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const Course = mongoose.model("Course", courseSchema);
 
 export default Course;

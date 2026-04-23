@@ -51,29 +51,35 @@ const CourseCard = ({ course }) => {
           </div>
         </div>
 
-        {/* Mentor & Stipend Info */}
+        {/* Mentor Credibility Section */}
         <div className="mt-auto">
           {course.isInternship && (
-            <div className="mb-4 p-3 bg-emerald-50 rounded-xl flex items-center justify-between border border-emerald-100">
-              <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-tighter">Stipend during internship:</span>
-              <span className="text-sm font-extrabold text-emerald-800">{course.stipend}</span>
+            <div className="mb-6 p-4 bg-emerald-50/50 rounded-2xl flex items-center justify-between border border-emerald-100/50">
+              <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Stipend during internship:</span>
+              <span className="text-base font-black text-emerald-800">{course.stipend}</span>
             </div>
           )}
           
-          <div className="pt-4 border-t border-slate-50 flex items-center justify-between">
-            <div className="flex items-center gap-2">
+          <div className="pt-5 border-t border-slate-100 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
               <img 
-                src={course.mentor.avatar} 
-                alt={course.mentor.name} 
-                className="w-7 h-7 rounded-full bg-slate-100"
+                src={course.mentor?.avatar || 'https://i.pravatar.cc/150'} 
+                alt={course.mentor?.name || 'Instructor'} 
+                className="w-11 h-11 rounded-full bg-slate-100 object-cover border-2 border-white shadow-sm"
               />
-              <span className="text-[10px] font-bold text-slate-600 truncate max-w-[80px]">{course.mentor.name}</span>
-            </div>
-            <div className="text-right">
-              <div className="flex items-center gap-2">
-                <span className="text-lg font-extrabold text-primary">₹{course.price}</span>
-                <span className="text-xs text-slate-400 line-through">₹{course.originalPrice}</span>
+              <div className="flex flex-col min-w-0">
+                <span className="text-sm font-bold text-dark truncate">
+                  {course.mentor?.name || 'Rahul Mehta'}
+                </span>
+                <span className="text-[10px] font-medium text-slate-500 truncate">
+                  {course.mentor?.role || 'Growth Marketer'} • {course.mentor?.company || 'BrandHackers'}
+                </span>
               </div>
+            </div>
+            <div className="flex-shrink-0">
+              <span className="bg-primary/10 text-primary text-[10px] font-bold px-3 py-1.5 rounded-full whitespace-nowrap">
+                Industry Expert
+              </span>
             </div>
           </div>
         </div>

@@ -1,19 +1,49 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Zap, ArrowRight, Target, Users, Briefcase, Quote, Star, Play } from 'lucide-react';
+import API from '../services/api';
 import brandVideo from '../assets/Logo_BrandHackers.mp4';
-import {
-  FiArrowRight as ArrowRight,
-  FiTarget as Target,
-  FiZap as Zap,
-  FiUsers as Users,
-  FiBriefcase as Briefcase,
-} from 'react-icons/fi';
 import Button from '../components/Button';
 import CourseCard from '../components/CourseCard';
-import { COURSES, TESTIMONIALS, STATS, FEATURES } from '../utils/mockData';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
+  const [courses, setCourses] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
+  const [features, setFeatures] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch independently so one failure (like 404 on features) doesn't break everything
+        const coursesRes = await API.get('/courses').catch(err => {
+          console.warn("Courses endpoint not ready:", err);
+          return { data: [] };
+        });
+        setCourses(coursesRes.data);
+
+        const testimonialsRes = await API.get('/testimonials').catch(err => {
+          console.warn("Testimonials endpoint not ready:", err);
+          return { data: [] };
+        });
+        if (testimonialsRes.data.length > 0) setTestimonials(testimonialsRes.data);
+
+        const featuresRes = await API.get('/features').catch(err => {
+          console.warn("Features endpoint not ready:", err);
+          return { data: [] };
+        });
+        if (featuresRes.data.length > 0) setFeatures(featuresRes.data);
+
+      } catch (err) {
+        console.error("Error fetching home data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   const sectionVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -39,7 +69,7 @@ const Home = () => {
 
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest mb-8 w-fit"
-              style={{ background: 'rgba(107,62,250,0.1)', color: '#6B3EFA' }}>
+              style={{ background: 'rgba(95, 94, 98, 0.15)', color: '#5a1006ff' }}>
               <Zap size={13} /> Next Batch Starts Soon
             </div>
 
@@ -119,7 +149,7 @@ const Home = () => {
           </motion.div>
 
           {/* Mobile-only: video below text */}
-          <div className="relative lg:hidden h-[320px] overflow-hidden">
+          <div className="relative lg:hidden h-[400px] overflow-hidden bg-slate-50">
             <video
               src={brandVideo}
               autoPlay
@@ -128,17 +158,54 @@ const Home = () => {
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, transparent 40%)' }} />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent pointer-events-none" />
           </div>
+        </div>
+      </section>
 
+      {/* 1.5 TRUSTED BY SECTION */}
+      <section className="py-16 bg-white border-y border-slate-50 overflow-hidden relative">
+        {/* Edge Fades */}
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        
+        <div className="container mx-auto px-6 mb-10 text-center">
+          <p className="text-slate-400 font-bold text-[10px] uppercase tracking-[0.2em]">
+            Trusted by learners from top companies
+          </p>
+        </div>
+
+        <div className="logo-track flex items-center gap-16 md:gap-24 px-4">
+          {[
+            { name: "Google", url: "https://www.vectorlogo.zone/logos/google/google-ar21.svg" },
+            { name: "Meta", url: "https://www.vectorlogo.zone/logos/facebook/facebook-ar21.svg" },
+            { name: "Amazon", url: "https://www.vectorlogo.zone/logos/amazon/amazon-ar21.svg" },
+            { name: "Netflix", url: "https://www.vectorlogo.zone/logos/netflix/netflix-ar21.svg" },
+            { name: "Microsoft", url: "https://www.vectorlogo.zone/logos/microsoft/microsoft-ar21.svg" },
+            { name: "Airbnb", url: "https://www.vectorlogo.zone/logos/airbnb/airbnb-ar21.svg" },
+            // Duplicated for infinite scroll
+            { name: "Google", url: "https://www.vectorlogo.zone/logos/google/google-ar21.svg" },
+            { name: "Meta", url: "https://www.vectorlogo.zone/logos/facebook/facebook-ar21.svg" },
+            { name: "Amazon", url: "https://www.vectorlogo.zone/logos/amazon/amazon-ar21.svg" },
+            { name: "Netflix", url: "https://www.vectorlogo.zone/logos/netflix/netflix-ar21.svg" },
+            { name: "Microsoft", url: "https://www.vectorlogo.zone/logos/microsoft/microsoft-ar21.svg" },
+            { name: "Airbnb", url: "https://www.vectorlogo.zone/logos/airbnb/airbnb-ar21.svg" }
+          ].map((logo, idx) => (
+            <img 
+              key={idx} 
+              src={logo.url} 
+              alt={logo.name}
+              className="h-8 md:h-10 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer scale-90 hover:scale-105"
+            />
+          ))}
         </div>
       </section>
 
       {/* 2. FEATURES */}
       <section className="py-24" style={{ background: '#F5F3FF' }}>
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {FEATURES.map((feature, idx) => (
-            <motion.div key={idx} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}
+          {features.map((feature, idx) => (
+            <motion.div key={feature._id || idx} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={sectionVariants}
               className="bg-white p-8 rounded-3xl shadow-sm transition-all"
               style={{ border: '1px solid #EDE9FE' }}
               onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 20px 60px rgba(107,62,250,0.1)'; e.currentTarget.style.borderColor = '#6B3EFA'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
@@ -154,14 +221,48 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 3. COURSES */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-16 text-center leading-tight" style={{ fontFamily: 'Syne, sans-serif', color: '#0D0A1E' }}>
-            Our Career-Ready <span style={{ color: '#6B3EFA' }}>Programs</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {COURSES.slice(0, 3).map(course => <CourseCard key={course.id} course={course} />)}
+      {/* 3. CAREER-READY PROGRAMS */}
+      <section className="py-32 bg-white relative">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-primary font-bold text-xs uppercase tracking-[0.3em] mb-4 block"
+            >
+              Curriculum built for 2026
+            </motion.span>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-dark font-heading leading-tight mb-6">
+              Our Career-Ready <span className="text-primary">Programs</span>
+            </h2>
+            <p className="text-slate-500 font-inter text-lg">
+              Master the most in-demand digital skills through our outcome-oriented bootcamps designed by industry leaders.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {loading ? (
+              // Simple Loading Skeletons
+              [1, 2, 3].map(i => (
+                <div key={i} className="h-[450px] bg-slate-50 rounded-3xl animate-pulse border border-slate-100" />
+              ))
+            ) : courses.length > 0 ? (
+              courses.slice(0, 3).map(course => (
+                <CourseCard key={course._id || course.id} course={course} />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-20 bg-slate-50 rounded-[2.5rem] border border-dashed border-slate-200">
+                <p className="text-slate-400 font-medium italic">No programs available at the moment. Check back soon!</p>
+              </div>
+            )}
+          </div>
+
+          <div className="mt-20 text-center">
+            <Link to="/courses">
+              <Button variant="outline" className="gap-2 rounded-2xl group px-12 h-16 text-lg">
+                View All Programs <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -193,21 +294,125 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 5. TESTIMONIALS */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-extrabold mb-16 text-center tracking-tight" style={{ fontFamily: 'Syne, sans-serif', color: '#0D0A1E' }}>Real Success Stories</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {TESTIMONIALS.map(t => (
-              <div key={t.id} className="p-8 rounded-3xl flex gap-6" style={{ background: '#F5F3FF', border: '1px solid #EDE9FE' }}>
-                <img src={t.avatar} className="w-16 h-16 rounded-full shadow-lg" />
-                <div>
-                  <p className="mb-4 font-medium italic" style={{ color: '#4B5563' }}>"{t.quote}"</p>
-                  <h4 className="font-bold" style={{ color: '#0D0A1E' }}>{t.name}</h4>
-                  <p className="text-xs font-bold" style={{ color: '#6B3EFA' }}>{t.role}</p>
+      {/* 5. REAL SUCCESS STORIES (TESTIMONIALS) */}
+      <section className="py-32 bg-white relative overflow-hidden">
+        {/* Subtle background decoration */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-primary font-bold text-xs uppercase tracking-[0.3em] mb-4 block"
+            >
+              Wall of Fame
+            </motion.span>
+            <h2 className="text-4xl md:text-6xl font-extrabold text-dark font-heading tracking-tight leading-tight">
+              Real Stories from <br /> <span className="text-primary italic">HackSchool</span> Alumni
+            </h2>
+          </div>
+
+          <div className="testimonial-wrapper mt-10">
+            <div className="testimonial-track">
+              {[
+                {
+                  name: "Aman Verma",
+                  role: "Digital Marketer at Swiggy",
+                  quote: "The practical projects and the ₹15k stipend during my internship were game-changers. I got placed at Swiggy even before finishing the course!",
+                  avatar: "https://i.pravatar.cc/150?u=aman",
+                  companyLogo: "https://www.vectorlogo.zone/logos/swiggy/swiggy-icon.svg",
+                  rating: 5
+                },
+                {
+                  name: "Riya Sharma",
+                  role: "SEO Specialist at Zomato",
+                  quote: "HackSchool's mentors are true industry leaders. The depth of the SEO course is unmatched, and the placement cell is incredibly active.",
+                  avatar: "https://i.pravatar.cc/150?u=riya",
+                  companyLogo: "https://www.vectorlogo.zone/logos/zomato/zomato-tile.svg",
+                  rating: 5
+                },
+                {
+                  name: "Karan Johar",
+                  role: "Performance Lead at Nykaa",
+                  quote: "I was managing 7-figure ad spends within weeks of joining. The hands-on training here is exactly what the industry demands right now.",
+                  avatar: "https://i.pravatar.cc/150?u=karan",
+                  companyLogo: "https://www.vectorlogo.zone/logos/nykaa/nykaa-icon.svg",
+                  rating: 5
+                },
+                {
+                  name: "Sneha Patel",
+                  role: "Content Strategist at Razorpay",
+                  quote: "The outcome-based curriculum transition from learning to earning was seamless. Highly recommended for anyone serious about digital marketing.",
+                  avatar: "https://i.pravatar.cc/150?u=sneha",
+                  companyLogo: "https://www.vectorlogo.zone/logos/razorpay/razorpay-icon.svg",
+                  rating: 5
+                },
+                // Duplicated for infinite scroll
+                {
+                  name: "Aman Verma",
+                  role: "Digital Marketer at Swiggy",
+                  quote: "The practical projects and the ₹15k stipend during my internship were game-changers. I got placed at Swiggy even before finishing the course!",
+                  avatar: "https://i.pravatar.cc/150?u=aman",
+                  companyLogo: "https://www.vectorlogo.zone/logos/swiggy/swiggy-icon.svg",
+                  rating: 5
+                },
+                {
+                  name: "Riya Sharma",
+                  role: "SEO Specialist at Zomato",
+                  quote: "HackSchool's mentors are true industry leaders. The depth of the SEO course is unmatched, and the placement cell is incredibly active.",
+                  avatar: "https://i.pravatar.cc/150?u=riya",
+                  companyLogo: "https://www.vectorlogo.zone/logos/zomato/zomato-tile.svg",
+                  rating: 5
+                },
+                {
+                  name: "Karan Johar",
+                  role: "Performance Lead at Nykaa",
+                  quote: "I was managing 7-figure ad spends within weeks of joining. The hands-on training here is exactly what the industry demands right now.",
+                  avatar: "https://i.pravatar.cc/150?u=karan",
+                  companyLogo: "https://www.vectorlogo.zone/logos/nykaa/nykaa-icon.svg",
+                  rating: 5
+                },
+                {
+                  name: "Sneha Patel",
+                  role: "Content Strategist at Razorpay",
+                  quote: "The outcome-based curriculum transition from learning to earning was seamless. Highly recommended for anyone serious about digital marketing.",
+                  avatar: "https://i.pravatar.cc/150?u=sneha",
+                  companyLogo: "https://www.vectorlogo.zone/logos/razorpay/razorpay-icon.svg",
+                  rating: 5
+                }
+              ].map((t, idx) => (
+                <div 
+                  key={idx}
+                  className="testimonial-card-scroller group relative p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:border-primary/20 transition-all duration-500"
+                >
+                  <div className="absolute top-8 right-10 opacity-20 group-hover:opacity-40 transition-opacity">
+                    <Quote size={48} className="text-primary" />
+                  </div>
+                  
+                  <div className="flex items-center gap-2 mb-8">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+
+                  <p className="text-lg font-medium text-slate-700 leading-relaxed mb-10 font-inter italic line-clamp-3">
+                    "{t.quote}"
+                  </p>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <img src={t.avatar} className="w-14 h-14 rounded-2xl shadow-lg border-2 border-white" alt={t.name} />
+                      <div>
+                        <h4 className="font-bold text-dark font-heading">{t.name}</h4>
+                        <p className="text-xs font-bold text-primary uppercase tracking-wider">{t.role}</p>
+                      </div>
+                    </div>
+                    <img src={t.companyLogo} className="h-8 w-auto grayscale group-hover:grayscale-0 transition-all opacity-40 group-hover:opacity-100" alt="Company" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
