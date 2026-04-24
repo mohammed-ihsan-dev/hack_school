@@ -20,4 +20,10 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, './src/hooks'),
     },
   },
+  server: {
+    allowedHosts: [
+      'explore-landing-occupation-substitute.trycloudflare.com',
+      '.trycloudflare.com'
+    ]
+  }
 })
